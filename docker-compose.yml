@@ -1,0 +1,94 @@
+version: '3.7'
+
+services:
+  database:
+    container_name: 'Projecto_database'
+    restart: always
+    image: postgres:12
+    volumes:
+      - database-data:/var/lib/data/
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=passw0rd
+      - POSTGRES_DB=apidb
+    ports:
+      - "5432:5432"
+    networks: 
+      - private_network
+
+  #backend:
+    # container_name: 'Projecto_backend'
+    # restart: unless-stopped
+    # build:
+    #   context: './backend'
+    #   dockerfile: 'Dockerfile'
+    # volumes:
+    #     - ./backend:/go/src/projetoapi
+    # depends_on:
+    #     - database
+    # environment: 
+    #     - WAIT_HOSTS=database:5432
+    #     - CHOKIDAR_USEPOLLING=true
+    # networks:
+    #     - private_network
+    #     - public_network
+    # links:
+    #     - database
+      
+  frontend:
+    container_name: 'Projecto_frontend'
+    restart: unless-stopped
+    depends_on:
+        #- backend
+        - websockets
+    build:
+        context: './frontend'
+        dockerfile: 'Dockerfile'
+    volumes:
+        - ./frontend:/app
+        - /app/node_modules
+    environment: 
+        - CHOKIDAR_USEPOLLING=true
+    networks:
+        - public_network
+
+  websockets:
+    container_name: 'Projecto_websockets'
+    restart: unless-stopped
+    depends_on:
+      - database
+    build: 
+      context: './websockets'
+      dockerfile: 'Dockerfile'
+    volumes:
+      - ./websockets:/app
+      - /app/node_modules
+    networks: 
+      - public_network
+    links: 
+       - database
+
+  proxy:
+    container_name: 'Projecto_proxy'
+    restart: always
+    depends_on: 
+      - frontend
+      #- backend
+    build:
+      context: './proxy'
+      dockerfile: 'Dockerfile'
+    ports:
+      - '5000:80'
+    networks: 
+      - public_network
+
+  
+
+volumes:
+  database-data:
+
+networks:
+    public_network:
+        driver: bridge
+    private_network:
+        driver: bridge

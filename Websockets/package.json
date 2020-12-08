@@ -1,0 +1,13 @@
+{
+    "name": "websocket-microservice",
+    "main": "main.js",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "serve": "node main.js"
+    },
+    "dependencies": {
+        "express": "^4.15.2",
+        "ws": "^7.3.1"
+    }
+}
