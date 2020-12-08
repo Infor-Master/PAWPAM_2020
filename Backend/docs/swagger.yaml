@@ -1,0 +1,259 @@
+definitions:
+  model.Claims:
+    properties:
+      username:
+        type: string
+    type: object
+  model.Evaluation:
+    properties:
+      Note:
+        type: string
+      Rating:
+        type: integer
+    type: object
+  model.Users:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Autentica o utilizador e gera o token para os próximos acessos
+      parameters:
+      - description: Do login
+        in: body
+        name: evaluation
+        required: true
+        schema:
+          $ref: '#/definitions/model.Users'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Claims'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+      summary: Realizar autenticação
+  /auth/refresh_token:
+    put:
+      consumes:
+      - application/json
+      description: Atualiza o token de autenticação do usuário
+      parameters:
+      - description: Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Claims'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+      summary: Atualiza token de autenticação
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Regista um utilizador
+      parameters:
+      - description: Do register
+        in: body
+        name: evaluation
+        required: true
+        schema:
+          $ref: '#/definitions/model.Users'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Claims'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized
+      summary: Realizar registro
+  /echo:
+    get:
+      consumes:
+      - application/json
+      description: Echo the data sent though the get request.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Evaluation'
+            type: array
+        "404":
+          description: Not found
+      summary: Echo the data sent on get
+  /evaluation:
+    get:
+      consumes:
+      - application/json
+      description: Exibe a lista, sem todos os campos, de todas as avaliações
+      parameters:
+      - description: Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Evaluation'
+            type: array
+        "404":
+          description: Not found
+      security:
+      - BearerAuth: []
+      summary: Recupera as avaliações
+    post:
+      consumes:
+      - application/json
+      description: Cria uma avaliação sobre a utilização da aplicação
+      parameters:
+      - description: Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Add evaluation
+        in: body
+        name: evaluation
+        required: true
+        schema:
+          $ref: '#/definitions/model.Evaluation'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Evaluation'
+        "400":
+          description: Bad request
+        "404":
+          description: Not found
+      security:
+      - BearerAuth: []
+      summary: Adicionar uma avaliação
+  /evaluation/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Exclui uma avaliação realizada
+      operationId: get-string-by-int
+      parameters:
+      - description: Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Evaluation ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Evaluation'
+        "404":
+          description: Not found
+      security:
+      - BearerAuth: []
+      summary: Exclui uma avaliação pelo ID
+    get:
+      consumes:
+      - application/json
+      description: Exibe os detalhes de uma avaliação pelo ID
+      operationId: get-evaluation-by-int
+      parameters:
+      - description: Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Evaluation ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Evaluation'
+        "404":
+          description: Not found
+      security:
+      - BearerAuth: []
+      summary: Recupera uma avaliação pelo id
+    put:
+      consumes:
+      - application/json
+      description: Atualiza uma avaliação sobre a utilização da aplicação
+      parameters:
+      - description: Token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Udpdate evaluation
+        in: body
+        name: evaluation
+        required: true
+        schema:
+          $ref: '#/definitions/model.Evaluation'
+      - description: Evaluation ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Evaluation'
+        "400":
+          description: Bad request
+        "404":
+          description: Not found
+      security:
+      - BearerAuth: []
+      summary: Atualiza uma avaliação
+swagger: "2.0"
