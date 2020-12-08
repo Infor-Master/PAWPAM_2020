@@ -1,5 +1,6 @@
 # Mobile System for Managing Invoice Digitalization
 ![Codacy Badge](https://app.codacy.com/project/badge/Grade/7a53689b527a47f3845dbedea5541d62)
+
 Projecto realizado para as cadeiras de PAW e PAM do curso de Mestrado em Computação Móvel da Universidade Fernando Pessoa - 2020 
 
 Luísa Costa
