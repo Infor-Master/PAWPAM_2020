@@ -4,12 +4,12 @@ var app = require("express")();
 const wsServer = new ws.Server({ noServer: true });
 
 wsServer.on("connection", (socket) => {
-  console.log("got connection");
+  //console.log("got connection");
   socket.on("message", (msg) => {
     switch (msg) {
       case "updZone":
         wsServer.clients.forEach(function (client) {
-          console.log("client!");
+          //console.log("client!");
           client.send("getZone");
         });
         break;
@@ -20,7 +20,7 @@ wsServer.on("connection", (socket) => {
         });
         break;
       default:
-        console.log("defaulted: " + msg);
+        //console.log("defaulted: " + msg);
     }
   });
 });

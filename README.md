@@ -5,19 +5,19 @@ Projecto realizado para as cadeiras de PAW e PAM do curso de Mestrado em Computa
 Luísa Costa
 Rodrigo Soares
 
-# Estrutura
+## Estrutura
 Containers **Docker** via **Docker-Compose**:
-- Frontend: NodeJS +  React
-- Backend: Golang + Gin-gonic + Gorm
-- Reverse Proxy: Nginx
-- Websockets: NodeJs + WS
+-  Frontend: NodeJS +  React
+-  Backend: Golang + Gin-gonic + Gorm
+-  Reverse Proxy: Nginx
+-  Websockets: NodeJs + WS
 
-# Instruções
+## Instruções
 
 Requer **Docker** instalado na máquina de destino e conecção à internet para descarregar dependências
 
- - Fazer clone do projecto ou descarregar zip
- - Abrir consola na pasta raiz e executar o seguinte comando:
-	> docker-compose up
- - Abrir a seguinte página:
-	> http://localhost:5000
+-  Fazer clone do projecto ou descarregar zip
+-  Abrir consola na pasta raiz e executar o seguinte comando:
+  > docker-compose up
+-  Abrir a seguinte página:
+  > http://localhost:5000
