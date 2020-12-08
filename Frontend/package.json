@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "react_frontend_microservice",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

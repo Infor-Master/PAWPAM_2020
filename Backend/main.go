@@ -17,7 +17,7 @@ func init() {
 	services.OpenDatabase()
 	services.Db.AutoMigrate(&model.Worker{})
 	services.Db.AutoMigrate(&model.invoice{})
-	
+
 	var user model.User
 	user.Username = "User"
 	user.Name = "Test User Account"
@@ -43,7 +43,7 @@ func main() {
 		c.JSON(404, gin.H{"code": "PAGE_NOT_FOUND", "message": "Page not found"})
 	})
 
-	invoice := router.Group("/api/invoices")
+	invoice := router.Group("/invoices")
 	invoice.Use(services.AuthorizationRequired())
 	{
 		invoice.GET("/all", routes.GetInvoices)
@@ -51,8 +51,7 @@ func main() {
 		invoice.GET("/id/:id", routes.GetInvoice)
 	}
 
-
-	user := router.Group("/api/user")
+	user := router.Group("/user")
 	user.Use(services.AuthorizationRequired())
 	{
 		user.GET("/invoices", routes.Getinvoices)
@@ -65,7 +64,7 @@ func main() {
 		user.GET("/users", routes.GetUsers)
 	}
 
-	auth := router.Group("/api/")
+	auth := router.Group("/")
 	{
 		auth.POST("/login", routes.GenerateToken)
 		auth.PUT("/refresh_token", services.AuthorizationRequired(), routes.RefreshToken)

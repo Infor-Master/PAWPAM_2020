@@ -1,4 +1,5 @@
-version: "3.7"
+version: '3.7'
+
 services:
   database:
     container_name: 'Projecto_database'
@@ -14,43 +15,43 @@ services:
       - "5432:5432"
     networks: 
       - private_network
-  
-  backend:
-    container_name: 'Projecto_backend'
-    restart: unless-stopped
-    build:
-      context: './backend'
-      dockerfile: 'Dockerfile'
-    volumes:
-      - ./backend:/go/src/projetoapi
-    depends_on:
-      - database
-    environment: 
-      - WAIT_HOSTS=database:5432
-      - CHOKIDAR_USEPOLLING=true
-    networks:
-      - private_network
-      - public_network
-    links:
-      - database
 
+  #backend:
+    # container_name: 'Projecto_backend'
+    # restart: unless-stopped
+    # build:
+    #   context: './backend'
+    #   dockerfile: 'Dockerfile'
+    # volumes:
+    #     - ./backend:/go/src/projetoapi
+    # depends_on:
+    #     - database
+    # environment: 
+    #     - WAIT_HOSTS=database:5432
+    #     - CHOKIDAR_USEPOLLING=true
+    # networks:
+    #     - private_network
+    #     - public_network
+    # links:
+    #     - database
+      
   frontend:
     container_name: 'Projecto_frontend'
     restart: unless-stopped
     depends_on:
-      - backend
-      - websockets
+        #- backend
+        - websockets
     build:
-      context: './frontend'
-      dockerfile: 'Dockerfile'
+        context: './frontend'
+        dockerfile: 'Dockerfile'
     volumes:
-      - ./frontend:/app
-      - /app/node_modules
+        - ./frontend:/app
+        - /app/node_modules
     environment: 
-      - CHOKIDAR_USEPOLLING=true
+        - CHOKIDAR_USEPOLLING=true
     networks:
-      - public_network
-  
+        - public_network
+
   websockets:
     container_name: 'Projecto_websockets'
     restart: unless-stopped
@@ -72,7 +73,7 @@ services:
     restart: always
     depends_on: 
       - frontend
-      - backend
+      #- backend
     build:
       context: './proxy'
       dockerfile: 'Dockerfile'
@@ -80,3 +81,15 @@ services:
       - '5000:80'
     networks: 
       - public_network
+
+  
+
+volumes:
+  database-data:
+
+networks:
+    public_network:
+        driver: bridge
+    private_network:
+        driver: bridge
+        driver: bridge

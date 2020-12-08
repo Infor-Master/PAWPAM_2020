@@ -31,7 +31,7 @@ func GenerateTokenJWT(credentials model.Worker) string {
 	claims := &model.Claims{
 		Username: credentials.Username,
 		Name:     credentials.Name,
-		Id: credentials.ID,
+		Id:       credentials.ID,
 		StandardClaims: jwt.StandardClaims{
 			// In JWT, the expiry time is expressed as unix milliseconds
 			ExpiresAt: expirationTime.Unix(),
@@ -48,7 +48,7 @@ func GenerateTokenJWT(credentials model.Worker) string {
 	return tokenString
 }
 
-func ValidateTokenJWT(c *gin.Context) (bool) {
+func ValidateTokenJWT(c *gin.Context) bool {
 	token, b, done := GetAuthorizationToken(c)
 	if done {
 		return b

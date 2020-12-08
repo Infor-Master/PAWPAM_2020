@@ -1,8 +1,11 @@
 package model
 
-import "github.com/jinzhu/gorm"
-import "github.com/qor/media/filesystem"	// se necessário
+import (
+	"github.com/qor/media/filesystem"
+)
 
-type MyFileSystem struct {
+// se necessário
+
+type FileSystem struct {
 	filesystem.FileSystem
 }
