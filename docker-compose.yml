@@ -16,30 +16,30 @@ services:
     networks: 
       - private_network
 
-  #backend:
-    # container_name: 'Projecto_backend'
-    # restart: unless-stopped
-    # build:
-    #   context: './backend'
-    #   dockerfile: 'Dockerfile'
-    # volumes:
-    #     - ./backend:/go/src/projetoapi
-    # depends_on:
-    #     - database
-    # environment: 
-    #     - WAIT_HOSTS=database:5432
-    #     - CHOKIDAR_USEPOLLING=true
-    # networks:
-    #     - private_network
-    #     - public_network
-    # links:
-    #     - database
+  backend:
+    container_name: 'Projecto_backend'
+    restart: unless-stopped
+    build:
+      context: './backend'
+      dockerfile: 'Dockerfile'
+    volumes:
+        - ./backend:/go/src/projetoapi
+    depends_on:
+        - database
+    environment: 
+        - WAIT_HOSTS=database:5432
+        - CHOKIDAR_USEPOLLING=true
+    networks:
+        - private_network
+        - public_network
+    links:
+        - database
       
   frontend:
     container_name: 'Projecto_frontend'
     restart: unless-stopped
     depends_on:
-        #- backend
+        - backend
         - websockets
     build:
         context: './frontend'
@@ -73,7 +73,7 @@ services:
     restart: always
     depends_on: 
       - frontend
-      #- backend
+      - backend
     build:
       context: './proxy'
       dockerfile: 'Dockerfile'

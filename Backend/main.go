@@ -15,14 +15,13 @@ var identityKey = "id"
 
 func init() {
 	services.OpenDatabase()
-	services.Db.AutoMigrate(&model.Worker{})
-	services.Db.AutoMigrate(&model.invoice{})
+	services.Db.AutoMigrate(&model.User{})
+	services.Db.AutoMigrate(&model.Invoice{})
 
 	var user model.User
 	user.Username = "User"
 	user.Name = "Test User Account"
 	user.Password = services.HashAndSalt([]byte("user123"))
-	user.user = true
 	services.Db.Save(&user)
 
 	defer services.Db.Close()
@@ -46,22 +45,18 @@ func main() {
 	invoice := router.Group("/invoices")
 	invoice.Use(services.AuthorizationRequired())
 	{
-		invoice.GET("/all", routes.GetInvoices)
-		invoice.GET("/user", routes.GetUserinvoices)
+		invoice.GET("/user", routes.GetUserInvoices)
 		invoice.GET("/id/:id", routes.GetInvoice)
 	}
 
 	user := router.Group("/user")
 	user.Use(services.AuthorizationRequired())
 	{
-		user.GET("/invoices", routes.Getinvoices)
-		user.POST("/associate", routes.AssociateUsersinvoices)
-		user.POST("/invoices", routes.Addinvoice)
-		user.DELETE("/invoices/:id", routes.Deleteinvoice)
-		user.DELETE("/users/:id", routes.DeleteUser)
-		user.DELETE("/associate", routes.DesassociateUsersinvoices)
+		user.GET("/invoices", routes.GetInvoice)
+		user.POST("/invoices", routes.AddInvoice)
+		user.DELETE("/invoices/:id", routes.DeleteInvoice)
+		//user.DELETE("/users/:id", routes.DeleteUser)
 		user.POST("/users", routes.Register)
-		user.GET("/users", routes.GetUsers)
 	}
 
 	auth := router.Group("/")
