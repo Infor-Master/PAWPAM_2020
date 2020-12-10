@@ -23,7 +23,7 @@ func GetSecretKey() []byte {
 	return []byte(secretKey)
 }
 
-func GenerateTokenJWT(credentials model.Worker) string {
+func GenerateTokenJWT(credentials model.User) string {
 	// Set expiration time of the token
 	expirationTime := time.Now().Add(15 * time.Minute)
 

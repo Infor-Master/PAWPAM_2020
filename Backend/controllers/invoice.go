@@ -7,46 +7,47 @@ import (
 	"strconv"
 	"github.com/gin-gonic/gin"
 
-	"flag"
-	"log"
+	//"flag"
+	//"log"
 )
 
 
 /**
- * Procura na lista de faturas do utilizador se existe uma fatura com o id enviado por parâmetro 
+ * Procura na lista de faturas do utilizador se existe uma fatura com o id enviado por parâmetro
+ * nos parâmetros tem que contar o ID do user e o ID da fatura
 **/
 func GetInvoice(c *gin.Context) {
 
-	var invoice model.Invoice
-
 	// Vai buscar o ID e verifica se é nulo ou não
-	id, err := strconv.ParseUint(c.Param("id"), 10, 32)
+	invoice_ID, err := strconv.ParseUint(c.Param("invoiceID"), 10, 32)
 
 	if err != nil{
 		c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusBadRequest, "message": "Invalid Invoice ID!"})
-		return nil
+		return
 	}
 
-	uintID := uint(id)
+	uintID := uint(invoice_ID)
 
 	// Vai buscar a lista de invoices e verifica se é nula ou não
-	invoices, err := GetUserinvoice
 
-	if err != nil{
+	var listInvoices = GetUserInvoices(c)
+
+	if listInvoices == nil {
 		c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusBadRequest, "message": "Lista de faturas vazia!"})
-		return nil
+		return
 	}
 
 	// Procura se o ID da fatura existe na lista de faturas do utiliador
-	for _, invoice := range invoices {
+	for _, invoice := range listInvoices {
 		
 		if invoice.ID == uintID {
-			return &invoice
+
+			c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": invoice})
 		}
 	}
 
 	c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusBadRequest, "message": "Não existe na sua lista de faturas!"})
-	return nil
+	return
 
 }
 
@@ -55,7 +56,7 @@ func GetInvoice(c *gin.Context) {
 **/
 func AddInvoice(c *gin.Context) {
 	
-	var addr = flag.String("addr", ":8080", "http server address")
+	/*var addr = flag.String("addr", ":8080", "http server address")
 
 	flag.Parse()
 
@@ -64,7 +65,7 @@ func AddInvoice(c *gin.Context) {
 	})
 
 	log.Fatal(http.ListenAndServe(*addr, nil))
-
+*/
 	var invoice model.Invoice
 
 	if err := c.ShouldBindJSON(&invoice); err != nil {

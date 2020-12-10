@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+import './App.css';
+import HomePage from './components/HomePage';
+import Layout from './components/Layout';
+import Login from './components/Login';
+import Logout from './components/Logout';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { connect } from 'react-redux';
+
+const App = props => {
+
+  const routes = (
+    <Switch>
+      <Route path="/home" component={HomePage} />
+      <Route path="/logout" component={Logout} />
+      <Route path="/" component={Login} />
+      <Route render={() => <h1>Not found!</h1>} />
+      <Redirect to="/" />
+    </Switch>
   );
+
+  return (
+    <React.Fragment>
+      <BrowserRouter>
+        <div className="App">
+          <Layout>
+            {routes}
+          </Layout>
+        </div>
+      </BrowserRouter>
+    </React.Fragment>
+  );
+
 }
 
-export default App;
+// get state from reducer
+const mapStateToProps = (state) => {
+  return {
+    token: state.auth.token,
+  };
+}
+
+export default connect(mapStateToProps, null)(App);
