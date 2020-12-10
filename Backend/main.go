@@ -37,19 +37,20 @@ func main() {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 
-	// AUTH
 	router.NoRoute(func(c *gin.Context) {
 		c.JSON(404, gin.H{"code": "PAGE_NOT_FOUND", "message": "Page not found"})
 	})
 
-	invoice := router.Group("/invoices")
+	router.GET("/api/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+	invoice := router.Group("/api/invoices")
 	invoice.Use(services.AuthorizationRequired())
 	{
 		invoice.GET("/user", routes.GetUserInvoices)
 		invoice.GET("/id/:id", routes.GetInvoice)
 	}
 
-	user := router.Group("/user")
+	user := router.Group("/api/user")
 	user.Use(services.AuthorizationRequired())
 	{
 		user.GET("/invoices", routes.GetInvoice)
@@ -59,12 +60,11 @@ func main() {
 		user.POST("/users", routes.Register)
 	}
 
-	auth := router.Group("/")
+	auth := router.Group("/api")
 	{
 		auth.POST("/login", routes.GenerateToken)
 		auth.PUT("/refresh_token", services.AuthorizationRequired(), routes.RefreshToken)
 	}
 
-	router.GET("/api/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	router.Run(":8081")
 }
