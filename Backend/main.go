@@ -63,6 +63,7 @@ func main() {
 	auth := router.Group("/api")
 	{
 		auth.POST("/login", routes.GenerateToken)
+		auth.POST("/signup", routes.Register)
 		auth.PUT("/refresh_token", services.AuthorizationRequired(), routes.RefreshToken)
 	}
 

@@ -79,6 +79,8 @@ func Register(c *gin.Context) {
 
 	user.Password = hash
 
+	services.OpenDatabase()
+
 	services.Db.Save(&user)
 	c.JSON(http.StatusCreated, gin.H{"status": http.StatusCreated, "message": "Create successful!", "resourceId": user.Name})
 }

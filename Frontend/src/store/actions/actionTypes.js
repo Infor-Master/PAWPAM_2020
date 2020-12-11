@@ -8,3 +8,6 @@ export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const REFRESH_TOKEN = 'REFRESH_TOKEN';
 export const SET_AUTH_REDIRECT_PATH = 'SET_AUTH_REDIRECT_PATH';
+
+//sigup
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';

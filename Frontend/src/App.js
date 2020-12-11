@@ -6,15 +6,19 @@ import HomePage from './components/HomePage';
 import Layout from './components/Layout';
 import Login from './components/Login';
 import Logout from './components/Logout';
+import SignUp from './components/SignUp';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from 'react-redux';
+
 
 const App = props => {
 
   const routes = (
     <Switch>
       <Route path="/home" component={HomePage} />
+      <Route path="/signup" component={SignUp} />
       <Route path="/logout" component={Logout} />
+      <Route path="/signup" component={SignUp} />
       <Route path="/" component={Login} />
       <Route render={() => <h1>Not found!</h1>} />
       <Redirect to="/" />
