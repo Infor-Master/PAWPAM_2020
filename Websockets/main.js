@@ -15,7 +15,7 @@ wsServer.on("connection", (socket) => {
         break;
       case "updWorker":
         wsServer.clients.forEach(function (client) {
-          console.log("client!");
+          //console.log("client!");
           client.send("getWorker");
         });
         break;
