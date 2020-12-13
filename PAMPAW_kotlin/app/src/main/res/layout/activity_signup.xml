@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signup.SignupActivity">
+
+    <EditText
+        android:id="@+id/editTextSignupName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="65dp"
+        android:ems="10"
+        android:hint="@string/signup_name"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextSignupUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="57dp"
+        android:ems="10"
+        android:hint="@string/signup_username"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="@+id/editTextSignupName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSignupName" />
+
+    <EditText
+        android:id="@+id/editTextSignupNif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="54dp"
+        android:ems="10"
+        android:hint="@string/signup_nif"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@+id/editTextSignupUsername"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSignupUsername" />
+
+    <EditText
+        android:id="@+id/editTextSignupPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="69dp"
+        android:ems="10"
+        android:hint="@string/signup_password"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="@+id/editTextSignupNif"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSignupNif"
+        android:importantForAutofill="no" />
+
+    <Button
+        android:id="@+id/button_Signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="69dp"
+        android:text="@string/signup_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSignupPassword" />
+</androidx.constraintlayout.widget.ConstraintLayout>

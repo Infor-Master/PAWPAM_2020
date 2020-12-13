@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PAMPAW_kotlin</string>
+    <string name="signup_username">Username</string>
+    <string name="signup_nif">Nif</string>
+    <string name="signup_password">Password</string>
+    <string name="signup_button">SignUp</string>
+    <string name="signup_name">Name</string>
+</resources>
