@@ -5,4 +5,5 @@
     <string name="signup_password">Password</string>
     <string name="signup_button">SignUp</string>
     <string name="signup_name">Name</string>
+    <string name="login">Login</string>
 </resources>

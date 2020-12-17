@@ -14,11 +14,11 @@ class SignupActivity : AppCompatActivity() {
         setContentView(R.layout.activity_signup)
 
         button_Signup.setOnClickListener{
-            addDummyUser()
+            addUser()
         }
     }
 
-    fun addDummyUser() {
+    fun addUser() {
 
         val apiService = RestApiService()
         val userInfo = UserInfo(
@@ -32,10 +32,7 @@ class SignupActivity : AppCompatActivity() {
         println("USER : $userInfo")
 
         apiService.addUser(userInfo) {
-            println("should be added")
+            println("Added")
         }
-
-        //println("Não entrou no outro : "+ userInfo.name)
-
     }
 }

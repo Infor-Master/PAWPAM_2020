@@ -2,9 +2,7 @@ package edu.ufp.pam.pampaw_kotlin.models
 
 import com.google.gson.annotations.SerializedName
 
-data class UserInfo(
-    @SerializedName("name") val name: String?,
+data class LoginInfo(
     @SerializedName("password") val password: String?,
-    @SerializedName("nif") val nif: Int?,
     @SerializedName("username") val username: String?
 )
