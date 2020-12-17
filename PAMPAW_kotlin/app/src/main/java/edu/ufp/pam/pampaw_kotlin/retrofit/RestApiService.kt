@@ -11,6 +11,7 @@ class RestApiService {
         val retrofit = ServiceBuilder.buildService(RestApi::class.java)
 
         println("URL " + ServiceBuilder.retrofit.baseUrl().toString())
+
         retrofit.addUser(userData).enqueue(
             object : Callback<UserInfo> {
                 override fun onFailure(call: Call<UserInfo>, t: Throwable) {
@@ -20,7 +21,6 @@ class RestApiService {
                 override fun onResponse( call: Call<UserInfo>, response: Response<UserInfo>) {
                     val addedUser = response.body()
                     onResult(addedUser)
-                    println("Sucesso")
                 }
             }
         )

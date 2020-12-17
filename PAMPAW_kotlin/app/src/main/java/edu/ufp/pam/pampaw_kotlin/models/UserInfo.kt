@@ -4,8 +4,8 @@ import android.text.Editable
 import com.google.gson.annotations.SerializedName
 
 data class UserInfo(
-    @SerializedName("name") val name: Editable,
-    @SerializedName("password") val password: Editable,
-    @SerializedName("nif") val nif: Editable,
-    @SerializedName("username") val username: Editable
+    @SerializedName("name") val name: String?,
+    @SerializedName("password") val password: String?,
+    @SerializedName("nif") val nif: Int?,
+    @SerializedName("username") val username: String?
 )

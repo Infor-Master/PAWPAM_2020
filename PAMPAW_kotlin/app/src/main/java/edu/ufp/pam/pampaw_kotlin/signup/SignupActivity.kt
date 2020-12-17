@@ -19,23 +19,20 @@ class SignupActivity : AppCompatActivity() {
     }
 
     fun addDummyUser() {
-        println("NAME : "+ (findViewById<EditText>(R.id.editTextSignupName)).text)
-        println("USERNAME : "+ (findViewById<EditText>(R.id.editTextSignupUsername)).text)
-        println("PASSWORD : "+ (findViewById<EditText>(R.id.editTextSignupPassword)).text)
-        println("NIF : "+ (findViewById<EditText>(R.id.editTextSignupNif)).text)
 
         val apiService = RestApiService()
         val userInfo = UserInfo(
-            password = (findViewById<EditText>(R.id.editTextSignupName)).text,
-            name = (findViewById<EditText>(R.id.editTextSignupName)).text,
-            username = (findViewById<EditText>(R.id.editTextSignupName)).text,
-            nif = (findViewById<EditText>(R.id.editTextSignupNif)).text
+
+            username = (findViewById<EditText>(R.id.editTextSignupUsername)).text.toString(),
+            name = (findViewById<EditText>(R.id.editTextSignupName)).text.toString(),
+            password = (findViewById<EditText>(R.id.editTextSignupPassword)).text.toString(),
+            nif = (findViewById<EditText>(R.id.editTextSignupNif)).text.toString().toInt()
         )
 
         println("USER : $userInfo")
 
         apiService.addUser(userInfo) {
-            println("NAME : "+ userInfo.name)
+            println("should be added")
         }
 
         //println("Não entrou no outro : "+ userInfo.name)

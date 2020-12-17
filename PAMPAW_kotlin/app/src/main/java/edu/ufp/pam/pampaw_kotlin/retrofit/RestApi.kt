@@ -7,6 +7,7 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 
 interface RestApi {
+
     @Headers("Content-Type: application/json")
     @POST("signup")
     fun addUser(@Body userData: UserInfo): Call<UserInfo>
