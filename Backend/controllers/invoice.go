@@ -5,12 +5,11 @@ import (
 	"projetoapi/model"
 	"projetoapi/services"
 	"strconv"
-	"github.com/gin-gonic/gin"
 
+	"github.com/gin-gonic/gin"
 	//"flag"
 	//"log"
 )
-
 
 /**
  * Procura na lista de faturas do utilizador se existe uma fatura com o id enviado por parâmetro
@@ -21,7 +20,7 @@ func GetInvoice(c *gin.Context) {
 	// Vai buscar o ID e verifica se é nulo ou não
 	invoice_ID, err := strconv.ParseUint(c.Param("invoiceID"), 10, 32)
 
-	if err != nil{
+	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusBadRequest, "message": "Invalid Invoice ID!"})
 		return
 	}
@@ -39,10 +38,10 @@ func GetInvoice(c *gin.Context) {
 
 	// Procura se o ID da fatura existe na lista de faturas do utiliador
 	for _, invoice := range listInvoices {
-		
-		if invoice.ID == uintID {
 
+		if invoice.ID == uintID {
 			c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": invoice})
+			return
 		}
 	}
 
@@ -55,7 +54,7 @@ func GetInvoice(c *gin.Context) {
 * Adiciona à tabela das faturas uma nova fatura com todos os parâmetros da mesma
 **/
 func AddInvoice(c *gin.Context) {
-	
+
 	/*var addr = flag.String("addr", ":8080", "http server address")
 
 	flag.Parse()
@@ -65,13 +64,14 @@ func AddInvoice(c *gin.Context) {
 	})
 
 	log.Fatal(http.ListenAndServe(*addr, nil))
-*/
+	*/
 	var invoice model.Invoice
 
 	if err := c.ShouldBindJSON(&invoice); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusBadRequest, "message": "Check syntax!"})
 		return
 	}
+
 	services.Db.Save(&invoice)
 	c.JSON(http.StatusCreated, gin.H{"status": http.StatusCreated, "message": "Create successful!", "resourceId": invoice.ID})
 }

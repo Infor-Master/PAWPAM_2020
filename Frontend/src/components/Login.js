@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 
-import * as authActions from '../store/actions/index';
+import * as actions from '../store/actions/index';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -76,8 +76,8 @@ const mapStateToProps = (state) => {
 // actions to reducer (dispatch)
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAuth: (username, password) => dispatch(authActions.auth(username, password)),
-        onTryAutoLogin: () => dispatch(authActions.authCheckState()),
+        onAuth: (username, password) => dispatch(actions.auth(username, password)),
+        onTryAutoLogin: () => dispatch(actions.authCheckState()),
     };
 }
 

@@ -7,6 +7,7 @@ import Layout from './components/Layout';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import SignUp from './components/SignUp';
+import Invoices from './components/Invoices';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from 'react-redux';
 
@@ -19,6 +20,7 @@ const App = props => {
       <Route path="/signup" component={SignUp} />
       <Route path="/logout" component={Logout} />
       <Route path="/signup" component={SignUp} />
+      <Route path="/invoices" component={Invoices} />
       <Route path="/" component={Login} />
       <Route render={() => <h1>Not found!</h1>} />
       <Redirect to="/" />

@@ -13,6 +13,9 @@ const NavbarUI = props => {
                 <Nav className="mr-auto">
                     <Nav.Link as={NavLink} to="/home">Home Page</Nav.Link>
                 </Nav>
+                <Nav className="mr-auto">
+                    <Nav.Link as={NavLink} to="/invoices">Invoices</Nav.Link>
+                </Nav>
                 <Nav>
                     <Nav.Link as={NavLink} to="/logout">Logout</Nav.Link>
                 </Nav>

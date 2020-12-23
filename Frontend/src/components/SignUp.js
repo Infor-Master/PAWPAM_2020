@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import * as authActions from '../store/actions/index';
+import * as actions from '../store/actions/index';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -69,7 +69,7 @@ const SignUp = props => {
 // actions to reducer (dispatch)
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSignUp: (username, password, name, nif) => dispatch(authActions.signup(username, password, name, nif))
+        onSignUp: (username, password, name, nif) => dispatch(actions.signup(username, password, name, nif))
     };
 }
 

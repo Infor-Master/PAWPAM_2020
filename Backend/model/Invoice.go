@@ -6,7 +6,7 @@ import (
 
 type Invoice struct {
 	gorm.Model `swaggerignore:"true"`
-	Image      FileSystem
-	User       User `gorm:"foreignKey:UserRefer"` // Usa a chave primária por defeito
-	Notes      *string
+	Image      string //base64 string
+	Name       string
+	UserID     int
 }
