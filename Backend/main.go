@@ -46,8 +46,8 @@ func main() {
 	invoice := router.Group("/api/invoices")
 	invoice.Use(services.AuthorizationRequired())
 	{
-		invoice.GET("/user", routes.GetUserInvoices)
-		invoice.GET("/id/:id", routes.GetInvoice)
+		invoice.GET("/user/:id", routes.GetUserInvoices)
+		//invoice.GET("/id/:id", routes.GetInvoice)
 	}
 
 	user := router.Group("/api/user")

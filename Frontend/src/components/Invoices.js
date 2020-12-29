@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import ImageUploader from 'react-images-upload';
@@ -10,9 +10,9 @@ import Button from '@material-ui/core/Button';
 import { useStyles } from './Styles';
 
 import * as actions from '../store/actions/index';
-import * as api from '../store/actions/api';
+import jwt_decode from 'jwt-decode';
 
-const Invoices = props => {
+const Invoice = props => {
 
     const classes = useStyles();
 
@@ -21,6 +21,11 @@ const Invoices = props => {
     const onSubmitHandler = (event) => {
         event.preventDefault();
         props.onAddInvoice(picture);
+    }
+
+    const onGetInvoicesHandler = (event) =>{
+        event.preventDefault();
+        props.onGetInvoices(jwt_decode(localStorage.getItem('token')).id);
     }
 
     let error = props.error? <label style={{ color: 'red' }}>Upload failed!</label> : null;
@@ -52,6 +57,9 @@ const Invoices = props => {
                         </div>
                     </form>
                     
+                    <Button onClick={onGetInvoicesHandler}>
+                        Get Invoices
+                    </Button>
                 </Box>
             </Grid>
         </Container >
@@ -63,14 +71,15 @@ const mapStateToProps = (state) => {
     return {
         token: state.auth.token,
         loading: state.loadingError.loading,
-        error: state.loadingError.error,
+        error: state.loadingError.error
     };
 }
 
 // actions to reducer (dispatch)
 const mapDispatchToProps = (dispatch) => {
     return {
-            onAddInvoice: (picture) => dispatch(actions.addInvoice(picture))
+            onAddInvoice: (picture) => dispatch(actions.addInvoice(picture)),
+            onGetInvoices: (id) => dispatch(actions.getInvoices(id))
         /* 
         onGetAllPlaces: (token) => dispatch(actions.fetchAllPlaces(token)),
         onGetUserPlaces: (token) => dispatch(actions.fetchUserPlaces(token)),
@@ -85,4 +94,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Invoices);
+export default connect(mapStateToProps, mapDispatchToProps)(Invoice);

@@ -6,6 +6,7 @@ import (
 	"projetoapi/services"
 
 	"github.com/gin-gonic/gin"
+	"fmt"
 )
 
 /**
@@ -15,13 +16,14 @@ import (
 func GetUserInvoices(c *gin.Context) []model.Invoice {
 
 	var user model.User
-	var invoice []model.Invoice
+	var invoices []model.Invoice
 
-	user_ID := c.Param("user_ID")
+	id := c.Param("id")
+	fmt.Println(id)
+	services.Db.First(&user, "id = ?", id)
 
-	services.Db.First(&user, "id = ?", user_ID)
-	services.Db.Model(&user).Related(&invoice, "invoice")
+	services.Db.Model(&user).Related(&invoices, "invoices")
 
-	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": invoice})
-	return invoice
+	c.JSON(http.StatusOK, gin.H{"status": http.StatusOK, "data": invoices})
+	return invoices
 }

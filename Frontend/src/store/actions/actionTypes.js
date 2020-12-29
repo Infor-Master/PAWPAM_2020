@@ -11,3 +11,6 @@ export const SET_AUTH_REDIRECT_PATH = 'SET_AUTH_REDIRECT_PATH';
 
 //sigup
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+
+//Invoices
+export const GET_INVOICES_SUCCESS = 'GET_INVOICES_SUCCESS';
