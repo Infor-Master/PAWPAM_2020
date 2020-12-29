@@ -1,12 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-    places: {
-        width: '100%',
-        maxWidth: '80%',
-        margin: 'auto',
-        backgroundColor: theme.palette.background.paper,
-    },
     backdrop: {
         zIndex: theme.zIndex.drawer + 1,
         color: '#fff',
@@ -17,4 +11,22 @@ export const useStyles = makeStyles((theme) => ({
             width: '25ch',
         },
     },
+    root: {
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-around",
+        overflow: "none",
+    },
+    gridList: {
+        height: "auto"
+    },
+    icon: {
+        color: "rgba(255, 255, 255, 0.54)"
+    },
+    image: {
+        "&:hover": {
+          opacity: 0.25
+        }
+
+    }
 }));

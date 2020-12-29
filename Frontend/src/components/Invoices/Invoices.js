@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import ImageUploader from 'react-images-upload';
+import GridList from "@material-ui/core/GridList";
 
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import { useStyles } from '../Styles';
-import List from '@material-ui/core/List';
 
 
 import Invoice from './Invoice';
@@ -94,19 +94,18 @@ const Invoices = props => {
                             <Button type="submit" variant="contained" color="primary">Upload</Button>
                         </div>
                     </form>
-
-                    <div>
-                        <label>
-                            <h4>List of invoices</h4>
-                            <div style={{ display: 'flex', width: '100%' }}>
-                                <List>
-                                    {invoices}
-                                </List>
-                            </div>
-                        </label>
-                    </div>
                 </Box>
+                <Box boxShadow={3} style={{ padding: '20px'}}>
+                <div className={classes.root}>
+                    <h4>List of invoices</h4>
+                    <GridList className={classes.GridList} cols={2} cellHeight={400}>
+                        {invoices}
+                    </GridList>                            
+                </div>
+                </Box>
+                
             </Grid>
+            
         </Container >
     );
 }
