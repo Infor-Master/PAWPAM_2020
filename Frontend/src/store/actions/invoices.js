@@ -2,7 +2,7 @@ import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 import * as loadingErrorActions from './index'
 import * as api from './api'
-import Invoice from '../../components/Invoices/Invoice'
+import * as actionTypes from './actionTypes'
 
 export const addInvoice = (picture) => {
 
@@ -40,10 +40,21 @@ export const addInvoice = (picture) => {
     }
     
 }
+////////////////////////////////////// GET INVOICES //////////////////////
+
+const getUserInvoices = (invoices) => {
+    //console.log(invoices)
+    return {
+        type: actionTypes.GET_ALL_INVOICES,
+        invoices: invoices
+    }
+}
 
 export const getInvoices = (id) => {
 
     return dispatch => {
+    dispatch(loadingErrorActions.startRequest());
+
     axios({
         method: "get",
         baseURL: api.URL_GET_INVOICES+"/"+id,
@@ -51,12 +62,8 @@ export const getInvoices = (id) => {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
     }).then(res => {
-        dispatch(loadingErrorActions.startRequest());
 
-        array.forEach(element => res.data{
-            
-        });
-        console.log(res)
+        dispatch(getUserInvoices(res.data.data));
 
         dispatch(loadingErrorActions.endRequest());
     }).catch(err => {

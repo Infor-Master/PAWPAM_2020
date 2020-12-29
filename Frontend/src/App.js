@@ -7,7 +7,7 @@ import Layout from './components/Layout';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import SignUp from './components/SignUp';
-import Invoices from './components/Invoices';
+import Invoices from './components/Invoices/Invoices';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from 'react-redux';
 
