@@ -5,6 +5,7 @@ import (
 	"projetoapi/model"
 	"projetoapi/services"
 	"strconv"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 	//"flag"
@@ -67,7 +68,10 @@ func AddInvoice(c *gin.Context) {
 	*/
 	var invoice model.Invoice
 
+	fmt.Println(c)
+
 	if err := c.ShouldBindJSON(&invoice); err != nil {
+		fmt.Println(err)
 		c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusBadRequest, "message": "Check syntax!"})
 		return
 	}

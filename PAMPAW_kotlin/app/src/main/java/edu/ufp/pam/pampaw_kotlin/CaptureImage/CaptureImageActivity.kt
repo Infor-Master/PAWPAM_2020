@@ -8,38 +8,36 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-
 import android.os.Build
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Base64
 import android.util.Base64.encodeToString
-
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import com.auth0.android.jwt.JWT
+import edu.ufp.pam.pampaw_kotlin.HomePage.HomePageActivity
 import edu.ufp.pam.pampaw_kotlin.R
 import edu.ufp.pam.pampaw_kotlin.models.InvoiceInfo
-import edu.ufp.pam.pampaw_kotlin.models.LoginInfo
 import edu.ufp.pam.pampaw_kotlin.retrofit.RestApiService
+import edu.ufp.pam.pampaw_kotlin.signup.SignupActivity
+import edu.ufp.pam.pampaw_kotlin.store.Global
 import kotlinx.android.synthetic.main.activity_capture_image.*
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.util.*
-import java.util.Base64 as UtilBase64
 
 class CaptureImageActivity : AppCompatActivity() {
 
     //Our variables
     private var mImageView: ImageView? = null
     private var mUri: Uri? = null
-    private var auxPathImage : String? = ""
+    private var auxPathImage : String = ""
 
     //Our widgets
     private lateinit var btnCapture: Button
@@ -177,10 +175,16 @@ class CaptureImageActivity : AppCompatActivity() {
         }
     }
 
-    fun uploadInvoiceDB(aux: String) {
+    fun uploadInvoiceDB(aux: String, fileName: String) {
+
+        val jwt = JWT(Global.token)
+        val auxFileName= fileName.split("/")
+
         val apiService = RestApiService()
         val invoiceInfo = InvoiceInfo(
-            image = aux
+            image = aux,
+            name= auxFileName[auxFileName.size-1],
+            userid = jwt.getClaim("id").asInt()
         )
         apiService.addInvoice(invoiceInfo) {
             println("Invoice added")
@@ -195,8 +199,8 @@ class CaptureImageActivity : AppCompatActivity() {
 
         button_upload_image.setOnClickListener{
             if(auxPathImage!=="" && mImageView!=null){
-                val aux=convertImage(auxPathImage!!)
-                uploadInvoiceDB(aux)
+                val aux=convertImage(auxPathImage)
+                uploadInvoiceDB(aux, auxPathImage)
             }
         }
 
@@ -213,6 +217,11 @@ class CaptureImageActivity : AppCompatActivity() {
             else{
                 openGallery()
             }
+        }
+
+        floatingActionButtonGetInvoices.setOnClickListener{
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
         }
     }
 }

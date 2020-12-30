@@ -11,5 +11,7 @@
     <string name="capture_invoice_description">capture invoice</string>
     <string name="Get_Invoice_from_gallery">Choose</string>
     <string name="upload_image">Upload</string>
+    <string name="button_get_invoices">Get Invoices</string>
+    <string name="listInvoices">List Invoices</string>
 
 </resources>

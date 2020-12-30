@@ -42,10 +42,10 @@ class LoginActivity : AppCompatActivity() {
         )
 
         apiService.loginUser(loginInfo) {
+            println(it?.token)
             val auxToken= it?.token
             if(auxToken!=null){
-                Global.token+=loginInfo.token
-
+                Global.token+=auxToken
                 SharedPreferencesHelper(this).setValueString(
                     "token",
                     auxToken

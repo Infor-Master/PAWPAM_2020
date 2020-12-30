@@ -7,27 +7,50 @@
     tools:context=".CaptureImage.CaptureImageActivity">
 
     <Button
+        android:id="@+id/button_Capture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/capture"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_upload_image"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
         android:id="@+id/button_choose_picture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="134dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="139dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginBottom="28dp"
         android:text="@string/Get_Invoice_from_gallery"
-        app:layout_constraintEnd_toEndOf="@+id/button_upload_image"
-        app:layout_constraintStart_toStartOf="@+id/invoiceView"
-        app:layout_constraintTop_toBottomOf="@+id/invoiceView" />
+        app:layout_constraintBottom_toTopOf="@+id/button_Capture"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButtonGetInvoices"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="77dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/button_upload_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_upload_image"
+        app:layout_constraintTop_toTopOf="@+id/button_upload_image"
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        android:focusable="true" />
 
     <ImageView
         android:id="@+id/invoiceView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="27dp"
         android:contentDescription="@string/capture_invoice_description"
-        app:layout_constraintBottom_toTopOf="@+id/button_Capture"
+        app:layout_constraintBottom_toTopOf="@+id/button_choose_picture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -35,23 +58,14 @@
         tools:srcCompat="@android:drawable/divider_horizontal_bright" />
 
     <Button
-        android:id="@+id/button_Capture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="53dp"
-        android:text="@string/capture"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/button_upload_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="34dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="37dp"
         android:text="@string/upload_image"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/button_Capture"
+        app:layout_constraintEnd_toStartOf="@+id/floatingActionButtonGetInvoices"
+        app:layout_constraintStart_toEndOf="@+id/button_Capture" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
