@@ -1,5 +1,5 @@
 FROM nginx:stable-alpine
 
-WORKDIR /etc/nginx/conf.d
+WORKDIR /etc/nginx/
 
 COPY . .

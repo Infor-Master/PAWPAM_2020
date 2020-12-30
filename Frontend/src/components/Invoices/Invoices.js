@@ -50,9 +50,6 @@ const Invoices = props => {
     // Map
     if (!props.invoices.loading) {
 
-        console.log("entrei")
-        console.log(props.invoices)
-
         invoices = props.invoices.map(invoice => {
             console.log(invoice)
 
@@ -61,12 +58,13 @@ const Invoices = props => {
                 id={invoice.ID}
                 name={invoice.Name}
                 image={invoice.Image}
+                info={invoice.Info}
             />
         });
     }
 
     if (invoices.length === 0) {
-        invoices = (<h3>Not found!</h3>);
+        invoices = (<h4>empty!</h4>);
     }
 
 

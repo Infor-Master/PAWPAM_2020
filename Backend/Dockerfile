@@ -1,7 +1,15 @@
 FROM golang:1.13-alpine
 
+ENV GOPATH /go
+
 RUN apk update && apk upgrade && \
     apk add --no-cache bash git openssh gcc libc-dev
+
+RUN apk add \
+  g++ \
+  git \
+  musl-dev \
+  tesseract-ocr-dev
 
 RUN go get -u github.com/jinzhu/gorm
 RUN go get -u github.com/gin-gonic/gin
@@ -16,9 +24,9 @@ RUN go get -u github.com/rs/cors/wrapper/gin
 RUN go get -u github.com/dgrijalva/jwt-go
 RUN go get -u github.com/stretchr/testify
 RUN go get -u github.com/qor/media/filesystem
+RUN go get -u github.com/otiai10/gosseract
 # HOT RELOAD
 RUN go get -u github.com/githubnemo/CompileDaemon
-
 
 # Set the Current Working Directory inside the container
 WORKDIR /go/src/projetoapi
