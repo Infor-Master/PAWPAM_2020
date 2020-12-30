@@ -12,9 +12,6 @@ const Invoice = props => {
 
     const classes = useStyles();
 
-    /* let img = new Image()
-    img.src = props.image; */
-
     const invoice = {
         ID: props.id,
         name: props.name,

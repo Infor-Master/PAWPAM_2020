@@ -47,13 +47,11 @@ func main() {
 	invoice.Use(services.AuthorizationRequired())
 	{
 		invoice.GET("/user/:id", routes.GetUserInvoices)
-		//invoice.GET("/id/:id", routes.GetInvoice)
 	}
 
 	user := router.Group("/api/user")
 	user.Use(services.AuthorizationRequired())
 	{
-		user.GET("/invoices", routes.GetInvoice)
 		user.POST("/invoices", routes.AddInvoice)
 		user.DELETE("/invoices/:id", routes.DeleteInvoice)
 		//user.DELETE("/users/:id", routes.DeleteUser)

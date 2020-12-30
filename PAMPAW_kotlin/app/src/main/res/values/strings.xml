@@ -6,4 +6,10 @@
     <string name="signup_button">SignUp</string>
     <string name="signup_name">Name</string>
     <string name="login">Login</string>
+    <string name="gosignup">SignUp</string>
+    <string name="capture">Capture</string>
+    <string name="capture_invoice_description">capture invoice</string>
+    <string name="Get_Invoice_from_gallery">Choose</string>
+    <string name="upload_image">Upload</string>
+
 </resources>

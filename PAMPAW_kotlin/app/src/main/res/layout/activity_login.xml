@@ -10,35 +10,45 @@
         android:id="@+id/button_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="187dp"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="92dp"
         android:text="@string/login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/editTextLoginPassword"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLoginPassword" />
 
     <EditText
         android:id="@+id/editTextLoginUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="133dp"
+        android:layout_marginBottom="74dp"
         android:ems="10"
         android:hint="@string/signup_username"
         android:importantForAutofill="no"
         android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/editTextLoginPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editTextLoginPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="74dp"
+        android:layout_marginTop="252dp"
         android:ems="10"
         android:hint="@string/signup_password"
         android:importantForAutofill="no"
         android:inputType="text|textPassword"
+        app:layout_constraintStart_toStartOf="@+id/editTextLoginUsername"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_goSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="172dp"
+        android:text="@string/gosignup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLoginUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/button_login" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
