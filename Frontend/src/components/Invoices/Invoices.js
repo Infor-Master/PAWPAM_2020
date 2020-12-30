@@ -28,7 +28,9 @@ const Invoices = props => {
     // buttons function
     const onSubmitHandler = (event) => {
         event.preventDefault();
-        props.onAddInvoice(picture);
+        if (props.token !== null) {
+            props.onAddInvoice(picture, props.token);
+        }
     }
 
 
@@ -41,7 +43,7 @@ const Invoices = props => {
 
     useEffect(() => {
         if (props.token !== null) {
-           onGetInvoices(jwt_decode(props.token).id)
+           onGetInvoices(jwt_decode(props.token).id, props.token)
         }
     }, [onGetInvoices, props.token])
 
@@ -121,8 +123,8 @@ const mapStateToProps = (state) => {
 // actions to reducer (dispatch)
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAddInvoice: (picture) => dispatch(actions.addInvoice(picture)),
-        onGetInvoices: (id) => dispatch(actions.getInvoices(id))
+        onAddInvoice: (picture, token) => dispatch(actions.addInvoice(picture, token)),
+        onGetInvoices: (id, token) => dispatch(actions.getInvoices(id, token))
         /* 
         onGetAllPlaces: (token) => dispatch(actions.fetchAllPlaces(token)),
         onGetUserPlaces: (token) => dispatch(actions.fetchUserPlaces(token)),

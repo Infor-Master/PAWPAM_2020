@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
-
-import * as actions from '../store/actions/index';
-import * as api from '../store/actions/api';
 
 const HomePage = props => {
 
@@ -39,17 +36,7 @@ const mapStateToProps = (state) => {
 // actions to reducer (dispatch)
 const mapDispatchToProps = (dispatch) => {
     return {
-        /* 
-        onGetAllPlaces: (token) => dispatch(actions.fetchAllPlaces(token)),
-        onGetUserPlaces: (token) => dispatch(actions.fetchUserPlaces(token)),
-        onUpdatePlace: (place, token) => dispatch(actions.editPlace(place, token)),
-        onDeletePlace: (id, token) => dispatch(actions.deletePlace(id, token)),
-        */
 
-        /*  // sockets
-        onAddSocketList: (placeID, users) => dispatch(actions.addSocketList(placeID, users)),
-        onAddSocketPeople: (placeID, numUsers) => dispatch(actions.addSocketPeople(placeID, numUsers))
-         */
     };
 }
 

@@ -6,6 +6,7 @@ import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 
 import { useStyles } from '../Styles';
+import { Link } from 'react-router-dom';
 
 
 const Invoice = props => {
@@ -30,9 +31,18 @@ const Invoice = props => {
                 title={invoice.name}
                 subtitle={<span>{invoice.info}</span>}
                 actionIcon={
-                    <IconButton className={classes.icon}>
-                        <InfoIcon />
-                    </IconButton>
+                    <Link 
+                        to={{
+                            pathname: "/invoice",
+                            state: {
+                                invoice: invoice
+                            }
+                        }}
+                    >
+                        <IconButton className={classes.icon}>
+                            <InfoIcon />
+                        </IconButton>
+                    </Link>
                 }
             />
         </GridListTile>
