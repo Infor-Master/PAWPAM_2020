@@ -13,5 +13,7 @@
     <string name="upload_image">Upload</string>
     <string name="button_get_invoices">Get Invoices</string>
     <string name="listInvoices">List Invoices</string>
+    <string name="numbers">Numbers</string>
+    <string name="images">IMAGES</string>
 
 </resources>
