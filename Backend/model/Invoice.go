@@ -9,4 +9,5 @@ type Invoice struct {
 	Image      string //base64 string
 	Name       string
 	UserID     int
+	Info       string
 }

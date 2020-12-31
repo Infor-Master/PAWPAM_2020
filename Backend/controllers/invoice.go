@@ -76,7 +76,17 @@ func AddInvoice(c *gin.Context) {
 		return
 	}
 
+	text, err := services.ProcessImage(invoice.Image)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusBadRequest, "message": "Cannot process image!"})
+		return
+	}
+
+	invoice.Info = text
+
 	services.Db.Save(&invoice)
+
 	c.JSON(http.StatusCreated, gin.H{"status": http.StatusCreated, "message": "Create successful!", "resourceId": invoice.ID})
 }
 

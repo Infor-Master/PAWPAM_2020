@@ -19,4 +19,5 @@ export {
 export {
     addInvoice,
     getInvoices,
+    deleteInvoice
 } from './invoices';
