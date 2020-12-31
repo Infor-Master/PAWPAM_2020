@@ -1,26 +1,31 @@
 package edu.ufp.pam.pampaw_kotlin.CaptureImage
 
 import android.Manifest
+import android.R.drawable
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.auth0.android.jwt.JWT
 import edu.ufp.pam.pampaw_kotlin.R
 import edu.ufp.pam.pampaw_kotlin.models.InvoiceInfo
 import edu.ufp.pam.pampaw_kotlin.retrofit.RestApiService
 import edu.ufp.pam.pampaw_kotlin.store.Global
 import kotlinx.android.synthetic.main.activity_capture.*
+import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+
 
 class CaptureActivity : AppCompatActivity() {
 
@@ -34,7 +39,7 @@ class CaptureActivity : AppCompatActivity() {
 
         upload_captured_image.setOnClickListener{
             if(image_view!==null){
-                val aux=convertImage(image_uri.toString())
+                val aux=convertImage(image_view.drawable)
                 uploadInvoiceDB(aux, image_uri.toString())
             }
         }
@@ -83,13 +88,22 @@ class CaptureActivity : AppCompatActivity() {
         }
     }
 
-    private fun convertImage(imagePath: String): String {
+    private fun convertImage(image: Drawable): String {
         val aux: String? = "data:image/jpeg;base64,"
-        val auxBitmap = BitmapFactory.decodeFile(imagePath)
-        val baos = ByteArrayOutputStream()
-        auxBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos) //bm is the bitmap object
-        val b = baos.toByteArray()
-        val encodedImage = Base64.encodeToString(b, Base64.DEFAULT)
+
+
+        val bitmapDrawable = image as BitmapDrawable
+        val bitmap = bitmapDrawable.bitmap
+
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+
+        val imageInByte = stream.toByteArray()
+        val bis = ByteArrayInputStream(imageInByte)
+
+        val encodedImage = Base64.encodeToString(imageInByte, Base64.DEFAULT)
+        println("aqui " + aux.plus(encodedImage))
+
         return aux.plus(encodedImage)
     }
 
