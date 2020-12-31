@@ -1,9 +1,6 @@
 package edu.ufp.pam.pampaw_kotlin.retrofit
 
-import edu.ufp.pam.pampaw_kotlin.models.InvoiceInfo
-import edu.ufp.pam.pampaw_kotlin.models.ListInvoices
-import edu.ufp.pam.pampaw_kotlin.models.LoginInfo
-import edu.ufp.pam.pampaw_kotlin.models.UserInfo
+import edu.ufp.pam.pampaw_kotlin.models.*
 import edu.ufp.pam.pampaw_kotlin.store.Global
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -25,4 +22,7 @@ interface RestApi {
 
     @GET("/api/invoices/user/{Id}")
     fun getUserInvoices(@Header("Authorization") token:String, @Path("Id") userId: Int): Call<ListInvoices>
+
+    @DELETE("/api/user/invoices/{Id}")
+    fun deleteInvoice(@Header("Authorization") token:String, @Path("Id") userId: Int): Call<MessageRetorned>
 }

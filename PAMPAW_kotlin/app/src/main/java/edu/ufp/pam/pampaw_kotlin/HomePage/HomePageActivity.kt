@@ -1,18 +1,17 @@
 package edu.ufp.pam.pampaw_kotlin.HomePage
 
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
-import android.view.ViewGroup
-
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TableRow
 import edu.ufp.pam.pampaw_kotlin.R
+import edu.ufp.pam.pampaw_kotlin.models.InvoiceInfo
 import edu.ufp.pam.pampaw_kotlin.retrofit.RestApiService
+import edu.ufp.pam.pampaw_kotlin.signup.SignupActivity
 import kotlinx.android.synthetic.main.activity_home_page.*
 
 class HomePageActivity : AppCompatActivity() {
@@ -28,14 +27,21 @@ class HomePageActivity : AppCompatActivity() {
         }
     }
 
-    fun createImageView(aux : Bitmap){
+    fun createImageView(aux : Bitmap,invoiceInfo: InvoiceInfo){
 
         newView = ImageView(this)
 
         linearLayout.addView(newView)
+        newView.setOnClickListener{
+            val intent = Intent(this, ImageActivity::class.java)
+            intent.putExtra("Info",invoiceInfo.info)
+            intent.putExtra("Name",invoiceInfo.name)
+            intent.putExtra("ID",invoiceInfo.id)
 
+            intent.putExtra("ImageString", invoiceInfo.image)
+            startActivity(intent)
+        }
         newView.setImageBitmap(aux)
-
     }
 
     fun getUserInvoices(){
@@ -45,16 +51,16 @@ class HomePageActivity : AppCompatActivity() {
         apiService.getUserInvoices{ it ->
             println("it size: "+it?.data?.size)
             it?.data?.forEach{
-                it.image?.let { it1 -> decodeImageString(it1) }
+                decodeImageString(it)
             }
         }
     }
 
-    fun decodeImageString(aux : String){
+    fun decodeImageString(invoiceInfo: InvoiceInfo){
 
-        val imageBytes = Base64.decode(aux.removePrefix("data:image/jpeg;base64,"), Base64.DEFAULT)
+        val imageBytes = Base64.decode(invoiceInfo.image?.removePrefix("data:image/jpeg;base64,"), Base64.DEFAULT)
         val decodeString= BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 
-        createImageView(decodeString)
+        createImageView(decodeString,invoiceInfo)
     }
 }

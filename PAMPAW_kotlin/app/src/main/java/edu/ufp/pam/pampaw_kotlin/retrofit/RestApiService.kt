@@ -2,13 +2,8 @@ package edu.ufp.pam.pampaw_kotlin.retrofit
 
 import android.content.Context
 import com.auth0.android.jwt.JWT
-import edu.ufp.pam.pampaw_kotlin.models.InvoiceInfo
-import edu.ufp.pam.pampaw_kotlin.models.ListInvoices
-import edu.ufp.pam.pampaw_kotlin.models.LoginInfo
-import edu.ufp.pam.pampaw_kotlin.models.UserInfo
+import edu.ufp.pam.pampaw_kotlin.models.*
 import edu.ufp.pam.pampaw_kotlin.store.Global
-import edu.ufp.pam.pampaw_kotlin.store.SharedPreferencesHelper
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -90,6 +85,24 @@ class RestApiService {
                 override fun onFailure(call: Call<ListInvoices>, t: Throwable) {
                     println(" ERROR CAUSE " + t.message)
                     onResult(null)
+                }
+            }
+        )
+    }
+
+    fun deleteInvoice(invoiceID: Int, onResult: (MessageRetorned?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(RestApi::class.java)
+
+        retrofit.deleteInvoice("Bearer ${Global.token}",invoiceID).enqueue(
+            object : Callback<MessageRetorned> {
+                override fun onFailure(call: Call<MessageRetorned>, t: Throwable) {
+                    println(" ERROR CAUSE " + t.message)
+                    onResult(null)
+                }
+
+                override fun onResponse(call: Call<MessageRetorned>, response: Response<MessageRetorned>) {
+                    val messageRetorned = response.body()
+                    onResult(messageRetorned)
                 }
             }
         )
