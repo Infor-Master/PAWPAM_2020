@@ -84,7 +84,7 @@ const Profile = props => {
                         <br></br>
                         <TextField required id="Name" label="Name" value={values.name} onChange={handleChange('name')} />
                         <br></br>
-                        <TextField required id="Nif" label="Nif" type="number" value={values.nif} onChange={handleChange('nif')} />
+                        <TextField required id="Nif" label="Nif" value={values.nif} onChange={handleChange('nif')} />
                         <br></br>
                         <FormControl className={clsx(classes.margin, classes.textField)}>
                             <InputLabel htmlFor="Password">Password</InputLabel>

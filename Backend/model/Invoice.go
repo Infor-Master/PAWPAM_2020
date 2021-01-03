@@ -6,8 +6,8 @@ import (
 
 type Invoice struct {
 	gorm.Model `swaggerignore:"true"`
-	Image      string //base64 string
+	Image      string `gorm:"not null"` //base64 string
 	Name       string
-	UserID     int
+	UserID     int `gorm:"not null"`
 	Info       string
 }
