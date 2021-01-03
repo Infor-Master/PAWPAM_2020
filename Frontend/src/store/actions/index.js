@@ -21,3 +21,7 @@ export {
     getInvoices,
     deleteInvoice
 } from './invoices';
+
+export {
+    onUpdateUserInfo
+} from './user';
