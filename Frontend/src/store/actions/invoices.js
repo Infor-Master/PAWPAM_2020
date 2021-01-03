@@ -4,7 +4,7 @@ import * as loadingErrorActions from "./index";
 import * as api from "./api";
 import * as actionTypes from "./actionTypes";
 
-export const addInvoice = (picture, token) => {
+export const addInvoice = (picture, client, token) => {
   return (dispatch) => {
     let file = "";
     let reader = new FileReader();
@@ -28,6 +28,10 @@ export const addInvoice = (picture, token) => {
 
           console.log(res)
           alert("Invoice added!")
+          client.send(JSON.stringify({
+            data: "invoices",
+            type: "userevent"
+          }));
 
           dispatch(loadingErrorActions.endRequest());
         })

@@ -10,12 +10,37 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import { useStyles } from '../Styles';
 
-
 import Invoice from './Invoice';
 import * as actions from '../../store/actions/index';
 import jwt_decode from 'jwt-decode';
 
+import { w3cwebsocket as W3CWebSocket } from "websocket";
+const client = new W3CWebSocket('ws://localhost:5000/ws');
+
 const Invoices = props => {
+    
+    client.onopen = () => {
+        console.log('WebSocket Client Connected');
+    };
+    client.onmessage = (msg) => {
+        console.log(msg)
+        const dataFromServer = JSON.parse(msg.data);
+        switch (dataFromServer.type) {
+            case "serverevent":
+                switch (dataFromServer.data) {
+                    case "invoices":
+                        if (props.token !== null) {
+                            onGetInvoices(jwt_decode(props.token).id, props.token)
+                         }
+                        break;
+                    default:
+                        console.log("defaulted: " + msg);
+                }
+              break;
+            default:
+              console.log("defaulted: " + msg);
+        }
+    };
 
     // styles
     const classes = useStyles();
@@ -29,7 +54,7 @@ const Invoices = props => {
     const onSubmitHandler = (event) => {
         event.preventDefault();
         if (props.token !== null) {
-            props.onAddInvoice(picture, props.token);
+            props.onAddInvoice(picture, client, props.token);
         }
     }
 
@@ -123,7 +148,7 @@ const mapStateToProps = (state) => {
 // actions to reducer (dispatch)
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAddInvoice: (picture, token) => dispatch(actions.addInvoice(picture, token)),
+        onAddInvoice: (picture, client, token) => dispatch(actions.addInvoice(picture, client, token)),
         onGetInvoices: (id, token) => dispatch(actions.getInvoices(id, token))
         /* 
         onGetAllPlaces: (token) => dispatch(actions.fetchAllPlaces(token)),

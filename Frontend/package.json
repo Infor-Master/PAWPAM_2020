@@ -22,7 +22,8 @@
     "react-scripts": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "jwt-decode": "^3.1.2",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "websocket": "^1.0.32"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -12,7 +12,6 @@ import InvoicePage from './components/Invoices/InvoicePage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { connect } from 'react-redux';
 
-
 const App = props => {
 
   const routes = (
