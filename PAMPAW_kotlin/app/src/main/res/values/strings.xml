@@ -6,4 +6,18 @@
     <string name="signup_button">SignUp</string>
     <string name="signup_name">Name</string>
     <string name="login">Login</string>
+    <string name="gosignup">SignUp</string>
+    <string name="capture">Capture</string>
+    <string name="capture_invoice_description">capture invoice</string>
+    <string name="Get_Invoice_from_gallery">Choose</string>
+    <string name="upload_image">Upload</string>
+    <string name="button_get_invoices">Get Invoices</string>
+    <string name="listInvoices">List Invoices</string>
+    <string name="numbers">Numbers</string>
+    <string name="images">IMAGES</string>
+    <string name="button_delete_image">Button</string>
+    <string name="showInvoice">Show Invoice</string>
+    <string name="file_paths">content://com.kijevigombooc.pirosfogo.fileprovider/my_images</string>
+    <string name="capture_image">Capture Image</string>
+    <string name="upload_captured_image">Upload</string>
 </resources>
