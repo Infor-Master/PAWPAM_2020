@@ -27,7 +27,6 @@ export const onUpdateUserInfo = (value, token) => {
                 dispatch(loadingErrorActions.startRequest());
 
                 console.log(res)
-                alert("INFO UPDATED!")
 
                 dispatch(loadingErrorActions.endRequest());
             })

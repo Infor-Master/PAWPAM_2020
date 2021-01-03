@@ -62,8 +62,13 @@ const Profile = props => {
 
     const onSubmitHandler = (event) => {
         event.preventDefault()
-
-        error = values.password == '' ? <label style={{ color: 'red' }}>Insert Password</label> : props.onUpdateUserInfo(values, props.token);
+        error = values.password
+        if (error == ''){
+            <label style={{ color: 'red' }}>Insert Password</label>
+        }else{
+            props.onUpdateUserInfo(values, props.token);
+            props.history.push('/logout');
+        }
     }
 
     return (
