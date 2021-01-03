@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import './App.css';
-import HomePage from './components/HomePage';
 import Layout from './components/Layout';
 import Login from './components/Login';
 import Logout from './components/Logout';
@@ -17,7 +16,6 @@ const App = props => {
 
   const routes = (
     <Switch>
-      <Route path="/home" component={HomePage} />
       <Route path="/signup" component={SignUp} />
       <Route path="/logout" component={Logout} />
       <Route path="/signup" component={SignUp} />

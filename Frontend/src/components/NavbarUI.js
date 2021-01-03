@@ -11,9 +11,6 @@ const NavbarUI = props => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link as={NavLink} to="/home">Home Page</Nav.Link>
-                </Nav>
-                <Nav className="mr-auto">
                     <Nav.Link as={NavLink} to="/invoices">Invoices</Nav.Link>
                 </Nav>
                 <Nav>
