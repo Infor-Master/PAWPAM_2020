@@ -17,6 +17,9 @@ const NavbarUI = props => {
                     <Nav.Link as={NavLink} to="/invoices">Invoices</Nav.Link>
                 </Nav>
                 <Nav>
+                    <Nav.Link as={NavLink} to="/profile">Profile</Nav.Link>
+                </Nav>
+                <Nav>
                     <Nav.Link as={NavLink} to="/logout">Logout</Nav.Link>
                 </Nav>
             </Navbar.Collapse>

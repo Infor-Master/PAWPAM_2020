@@ -7,6 +7,7 @@ import Layout from './components/Layout';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import SignUp from './components/SignUp';
+import Profile from './components/Profile';
 import Invoices from './components/Invoices/Invoices';
 import InvoicePage from './components/Invoices/InvoicePage';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -22,6 +23,8 @@ const App = props => {
       <Route path="/signup" component={SignUp} />
       <Route path="/invoices" component={Invoices} />
       <Route path="/invoice" component={InvoicePage} />
+      <Route path="/profile" component={Profile} />
+
       <Route path="/" component={Login} />
       <Route render={() => <h1>Not found!</h1>} />
       <Redirect to="/" />

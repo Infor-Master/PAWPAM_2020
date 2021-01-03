@@ -55,6 +55,7 @@ func main() {
 		user.POST("/invoices", routes.AddInvoice)
 		user.DELETE("/invoices/:id", routes.DeleteInvoice)
 		//user.DELETE("/users/:id", routes.DeleteUser)
+		user.POST("/update", routes.UpdateInfo)
 		user.POST("/users", routes.Register)
 	}
 
