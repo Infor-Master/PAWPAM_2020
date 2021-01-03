@@ -107,4 +107,23 @@ class RestApiService {
             }
         )
     }
+
+    fun updateProfile(profileInfo: Profile, onResult: (MessageRetorned?) -> Unit){
+        val retrofit = ServiceBuilder.buildService(RestApi::class.java)
+        retrofit.updateProfile( "Bearer ${Global.token}",profileInfo).enqueue(
+
+            object : Callback<MessageRetorned> {
+                override fun onFailure(call: Call<MessageRetorned>, t: Throwable) {
+                    println(" ERROR CAUSE " + t.message)
+                    onResult(null)
+                }
+
+                override fun onResponse(call: Call<MessageRetorned>, response: Response<MessageRetorned>) {
+                    val updatedProfile = response.body()
+                    println(updatedProfile)
+                    onResult(updatedProfile)
+                }
+            }
+        )
+    }
 }

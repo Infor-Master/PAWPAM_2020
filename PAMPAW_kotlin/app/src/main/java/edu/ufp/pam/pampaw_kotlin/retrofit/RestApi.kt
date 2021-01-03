@@ -25,4 +25,7 @@ interface RestApi {
 
     @DELETE("/api/user/invoices/{Id}")
     fun deleteInvoice(@Header("Authorization") token:String, @Path("Id") userId: Int): Call<MessageRetorned>
+
+    @POST("/api/user/update")
+    fun updateProfile(@Header("Authorization") token:String,@Body invoiceData: Profile): Call<MessageRetorned>
 }
