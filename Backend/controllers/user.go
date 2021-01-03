@@ -4,11 +4,11 @@ import (
 	"net/http"
 	"projetoapi/model"
 	"projetoapi/services"
-	"io/ioutil"
-	"strings"
-	"strconv"
-	"github.com/gin-gonic/gin"
+
 	"fmt"
+	"strconv"
+
+	"github.com/gin-gonic/gin"
 )
 
 /**
@@ -31,46 +31,51 @@ func GetUserInvoices(c *gin.Context) []model.Invoice {
 }
 
 func UpdateInfo(c *gin.Context) {
-	
-	var auxUser model.User
-	var values[]string
 
-	data, _ := ioutil.ReadAll(c.Request.Body)
-	s := string(data)
-	aux := strings.Split(s, ",")
-
-
-	for i := 0; i <6; i++ {
-		temp := strings.Split(aux[i], ":")
-		values =append(values,temp[1])
+	type Profile struct {
+		ID          int
+		Name        string
+		NIF         string
+		Password    string
+		NewPassword string
+		Username    string
 	}
 
-	id:= values[0]
-	name:= strings.ReplaceAll(values[1],"\"","")
-	username:= strings.ReplaceAll(values[5],"\"","")
-	nif:=values[2]
-	password:= strings.ReplaceAll(values[3],"\"","")
-	newPassword:= strings.ReplaceAll(values[4],"\"","")
+	var auxUser model.User
+	var profile Profile
 
-	services.Db.Find(&auxUser, "id = ?", id)
+	if err := c.ShouldBindJSON(&profile); err != nil {
+		fmt.Println(err)
+		c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusBadRequest, "message": "Check syntax!"})
+		return
+	}
+
+	fmt.Println("ID: ", profile.ID)
+	fmt.Println("Name: ", profile.Name)
+	fmt.Println("Username: ", profile.Username)
+	fmt.Println("NIF: ", profile.NIF)
+	fmt.Println("Password: ", profile.Password)
+	fmt.Println("NewPassword: ", profile.NewPassword)
+
+	services.Db.Find(&auxUser, "id = ?", profile.ID)
 	if auxUser.Username == "" {
 		c.JSON(http.StatusUnauthorized, gin.H{"status": http.StatusUnauthorized, "message": "Invalid User!"})
 		return
 	}
 
-	if(!services.ComparePasswords(auxUser.Password,[]byte(password))){
+	if !services.ComparePasswords(auxUser.Password, []byte(profile.Password)) {
 		c.JSON(http.StatusUnauthorized, gin.H{"status": http.StatusNotFound, "message": "Invalid Password!"})
 		return
 	}
 
-	if(newPassword!=""){
-		password = services.HashAndSalt([]byte(newPassword))
-	}else{
-		password = services.HashAndSalt([]byte(password))
+	if profile.NewPassword != "" {
+		profile.Password = services.HashAndSalt([]byte(profile.NewPassword))
+		services.Db.Model(&auxUser).Update("password", profile.Password)
 	}
 
-
-	services.Db.Model(&auxUser).Update("name",name)
+	services.Db.Model(&auxUser).Update("name", profile.Name)
+	NIF, _ := strconv.Atoi(profile.NIF)
+	services.Db.Model(&auxUser).Update("nif", NIF)
 
 	//services.Db.Updates(&auxUser)
 

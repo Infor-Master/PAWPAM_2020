@@ -6,7 +6,7 @@ import * as api from "./api";
 export const onUpdateUserInfo = (value, token) => {
     return (dispatch) => {
 
-        console.log("\nNAME:"+value.name+ "\nNIF: "+ value.nif + "\nPASSWORD: " +value.password +"\nNEWPASSWORD: "+value.newPassword + "\nUSERNAME: " +value.username + "\nconformirmedNewPassword: " +value.confirmedNewPassword + "USERID: "+ value.userid)
+        console.log("\nNAME:"+value.name+ "\nNIF: "+ value.nif + "\nPASSWORD: " +value.password +"\nNEWPASSWORD: "+value.newPassword + "\nUSERNAME: " +value.username + "\nconfirmedNewPassword: " +value.confirmedNewPassword + "\nUSERID: "+ value.userid)
 
         axios({
             method: "POST",

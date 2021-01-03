@@ -10,7 +10,15 @@ import { useStyles } from '../Styles';
 
 import * as actions from '../../store/actions/index';
 
+import { w3cwebsocket as W3CWebSocket } from "websocket";
+const client = new W3CWebSocket('ws://localhost:5000/ws');
+
+
 const InvoicePage = props => {
+
+    client.onopen = () => {
+        console.log('WebSocket Client Connected');
+    };
 
     // styles
     const classes = useStyles();
@@ -22,7 +30,7 @@ const InvoicePage = props => {
     // buttons function
     const onDeleteHandler = (event) => {
         event.preventDefault();
-        props.onDeleteInvoice(invoice, props.token);
+        props.onDeleteInvoice(invoice, client, props.token);
         props.history.push('/invoices');
     }
 
@@ -62,7 +70,7 @@ const mapStateToProps = (state) => {
 // actions to reducer (dispatch)
 const mapDispatchToProps = (dispatch) => {
     return {
-        onDeleteInvoice: (invoice, token) => dispatch(actions.deleteInvoice(invoice, token)),
+        onDeleteInvoice: (invoice, client, token) => dispatch(actions.deleteInvoice(invoice, client, token)),
     };
 }
 

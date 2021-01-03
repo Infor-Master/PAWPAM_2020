@@ -27,7 +27,7 @@ export const addInvoice = (picture, client, token) => {
           dispatch(loadingErrorActions.startRequest());
 
           console.log(res)
-          alert("Invoice added!")
+          //alert("Invoice added!")
           client.send(JSON.stringify({
             data: "invoices",
             type: "userevent"
@@ -76,7 +76,7 @@ export const getInvoices = (id, token) => {
   };
 };
 
-export const deleteInvoice = (invoice, token) => {
+export const deleteInvoice = (invoice, client, token) => {
   return (dispatch) => {
     dispatch(loadingErrorActions.startRequest());
 
@@ -89,6 +89,12 @@ export const deleteInvoice = (invoice, token) => {
     })
       .then((res) => {
         console.log(res)
+
+        client.send(JSON.stringify({
+          data: "invoices",
+          type: "userevent"
+        }));
+
         dispatch(loadingErrorActions.endRequest());
       })
       .catch((err) => {
