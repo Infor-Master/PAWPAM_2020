@@ -8,6 +8,8 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
+import { BiArrowBack } from "react-icons/bi";
+
 import { useStyles } from './Styles';
 
 const SignUp = props => {
@@ -34,6 +36,11 @@ const SignUp = props => {
             <Grid>
                 <Box boxShadow={3} style={{ padding: '50px' }}>
                     <form onSubmit={onSubmitHandler} className={classes.authTextFileds} noValidate autoComplete="off">
+                        
+                        <div style={{marginTop: 10}} >
+                            <Button  variant="contained" color="primary" href="/login"><BiArrowBack/></Button>
+                        </div>
+
                         <h2>SignUp</h2>
                         <div>
                             <TextField required id="standard-basic" label="Username" onChange={event => {

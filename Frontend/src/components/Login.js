@@ -34,7 +34,7 @@ const Login = props => {
 
     let error = props.error ? <label style={{ color: 'red' }}>Login failed!</label> : null;
 
-    let isAuth = props.token ? <Redirect to='/home' /> : null;
+    let isAuth = props.token ? <Redirect to='/invoices' /> : null;
 
     return (
         <Container maxWidth="sm" >
@@ -54,10 +54,14 @@ const Login = props => {
                             }} />
                         </div>
                         {error}
-                        <div>
+                        <div style={{marginTop: 10}}>
                             <Button type="submit" variant="contained" color="primary">Login</Button>
                         </div>
+                        <div style={{marginTop: 10}} >
+                            <Button  variant="contained" color="primary" href="/signup">Sigup</Button>
+                        </div>
                     </form>
+
                 </Box>
             </Grid>
         </Container >
