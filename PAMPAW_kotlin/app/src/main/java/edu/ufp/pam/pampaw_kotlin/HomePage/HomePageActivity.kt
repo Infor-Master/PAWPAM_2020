@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
 import android.widget.ImageView
+import edu.ufp.pam.pampaw_kotlin.Profile.ProfileActivity
 import edu.ufp.pam.pampaw_kotlin.R
 import edu.ufp.pam.pampaw_kotlin.models.InvoiceInfo
 import edu.ufp.pam.pampaw_kotlin.retrofit.RestApiService
@@ -24,6 +25,11 @@ class HomePageActivity : AppCompatActivity() {
 
         button_get_invoices.setOnClickListener{
             getUserInvoices()
+        }
+
+        button_go_profile.setOnClickListener{
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
         }
     }
 
