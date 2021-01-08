@@ -30,6 +30,7 @@ func init() {
 func main() {
 
 	services.FormatSwagger()
+	services.RabbitMQinit()
 
 	// Creates a gin router with default middleware:
 	// logger and recovery (crash-free) middleware

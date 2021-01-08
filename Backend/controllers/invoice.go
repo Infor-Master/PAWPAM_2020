@@ -1,11 +1,11 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"projetoapi/model"
 	"projetoapi/services"
 	"strconv"
-	"fmt"
 
 	"github.com/gin-gonic/gin"
 	//"flag"
@@ -56,25 +56,17 @@ func GetInvoice(c *gin.Context) {
 **/
 func AddInvoice(c *gin.Context) {
 
-	/*var addr = flag.String("addr", ":8080", "http server address")
-
-	flag.Parse()
-
-	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
-		ServeWs(w, r)
-	})
-
-	log.Fatal(http.ListenAndServe(*addr, nil))
-	*/
 	var invoice model.Invoice
-
-	fmt.Println(c)
 
 	if err := c.ShouldBindJSON(&invoice); err != nil {
 		fmt.Println(err)
 		c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusBadRequest, "message": "Check syntax!"})
 		return
 	}
+
+	//envia para rabbitmq
+	//http.statuscreated
+	services.HelloWorld(services.Channel, services.Hello_queue)
 
 	text, err := services.ProcessImage(invoice.Image)
 
