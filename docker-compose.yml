@@ -1,6 +1,27 @@
-version: '3.7'
+version: '2.3'
 
 services:
+  rabbitmq:
+    container_name: 'Projecto_rabbitmq'
+    restart: unless-stopped
+    image: 'rabbitmq:3-management'
+    environment: 
+      RABBITMQ_ERLANG_COOKIE: "SWOQKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    networks: 
+      - public_network
+      - private_network
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 20s
+      timeout: 10s
+      retries: 3
+
   database:
     container_name: 'Projecto_database'
     restart: always
@@ -15,6 +36,34 @@ services:
       - "5432:5432"
     networks: 
       - private_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d apidb -U admin -h 0.0.0.0 -p 5432"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+  
+  ocr_consumer:
+    container_name: 'Projecto_OCR'
+    restart: unless-stopped
+    build:
+      context: './ocr_consumer'
+      dockerfile: 'Dockerfile'
+    volumes:
+        - ./ocr_consumer:/go/src/projetoapi
+    depends_on:
+        database:
+          condition: service_healthy
+        rabbitmq:
+          condition: service_healthy
+    environment: 
+        - WAIT_HOSTS=database:5432
+        - CHOKIDAR_USEPOLLING=true
+    networks:
+        - private_network
+        - public_network
+    links:
+        - database
+        - rabbitmq
 
   backend:
     container_name: 'Projecto_backend'
@@ -25,7 +74,7 @@ services:
     volumes:
         - ./backend:/go/src/projetoapi
     depends_on:
-        - database
+        - ocr_consumer
     environment: 
         - WAIT_HOSTS=database:5432
         - CHOKIDAR_USEPOLLING=true
@@ -34,6 +83,7 @@ services:
         - public_network
     links:
         - database
+        - rabbitmq
       
   frontend:
     container_name: 'Projecto_frontend'
@@ -55,8 +105,6 @@ services:
   websockets:
     container_name: 'Projecto_websockets'
     restart: unless-stopped
-    depends_on:
-      - database
     build: 
       context: './websockets'
       dockerfile: 'Dockerfile'
@@ -65,8 +113,6 @@ services:
       - /app/node_modules
     networks: 
       - public_network
-    links: 
-      - database
   
   proxy:
     container_name: 'Projecto_proxy'
@@ -81,6 +127,7 @@ services:
       - '5000:80'
     networks: 
       - public_network
+
 
   
 

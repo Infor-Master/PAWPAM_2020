@@ -1,11 +1,12 @@
 package controllers
 
 import (
+	"fmt"
+	"log"
 	"net/http"
 	"projetoapi/model"
 	"projetoapi/services"
 	"strconv"
-	"fmt"
 
 	"github.com/gin-gonic/gin"
 	//"flag"
@@ -56,19 +57,7 @@ func GetInvoice(c *gin.Context) {
 **/
 func AddInvoice(c *gin.Context) {
 
-	/*var addr = flag.String("addr", ":8080", "http server address")
-
-	flag.Parse()
-
-	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
-		ServeWs(w, r)
-	})
-
-	log.Fatal(http.ListenAndServe(*addr, nil))
-	*/
 	var invoice model.Invoice
-
-	fmt.Println(c)
 
 	if err := c.ShouldBindJSON(&invoice); err != nil {
 		fmt.Println(err)
@@ -76,18 +65,17 @@ func AddInvoice(c *gin.Context) {
 		return
 	}
 
-	text, err := services.ProcessImage(invoice.Image)
-
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusBadRequest, "message": "Cannot process image!"})
-		return
-	}
-
-	invoice.Info = text
+	log.Printf(`"Saving Invoice %s with user %d..."`, invoice.Name, invoice.UserID)
 
 	services.Db.Save(&invoice)
 
-	c.JSON(http.StatusCreated, gin.H{"status": http.StatusCreated, "message": "Create successful!", "resourceId": invoice.ID})
+	//envia para rabbitmq
+	//http.statuscreated
+	msg := fmt.Sprintf(`{"Image": "%s", "ID": "%d"}`, invoice.Image, invoice.ID)
+
+	services.OCRInvoice(services.Channel, services.Hello_queue, msg)
+
+	c.JSON(http.StatusCreated, gin.H{"status": http.StatusCreated, "message": "Published Sucessfully"})
 }
 
 /**

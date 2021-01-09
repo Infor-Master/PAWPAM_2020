@@ -25,6 +25,8 @@ RUN go get -u github.com/dgrijalva/jwt-go
 RUN go get -u github.com/stretchr/testify
 RUN go get -u github.com/qor/media/filesystem
 RUN go get -u github.com/otiai10/gosseract
+RUN go get github.com/streadway/amqp/...
+
 # HOT RELOAD
 RUN go get -u github.com/githubnemo/CompileDaemon
 
