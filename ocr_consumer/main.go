@@ -32,7 +32,6 @@ func OCRInvoice(msg []byte) {
 		failOnError(err, "cannot proccess image")
 		return
 	}
-	log.Printf(text)
 
 	var invoice model.Invoice
 	id, err := strconv.Atoi(data.ID)
