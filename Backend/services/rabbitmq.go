@@ -16,8 +16,8 @@ func failOnError(err error, msg string) {
 	}
 }
 
-func HelloWorld(ch *amqp.Channel, q amqp.Queue) {
-	body := "hello_invoice"
+func OCRInvoice(ch *amqp.Channel, q amqp.Queue, msg string) {
+	body := msg
 	ch.Publish(
 		"",     // exchange
 		q.Name, // routing key
@@ -27,9 +27,7 @@ func HelloWorld(ch *amqp.Channel, q amqp.Queue) {
 			ContentType: "text/plain",
 			Body:        []byte(body),
 		})
-	log.Printf(" [x] Sent %s", body)
-
-	fmt.Printf("Hello World!")
+	log.Printf(" [x] Sent Invoice")
 }
 
 func RabbitMQinit() {
@@ -42,12 +40,12 @@ func RabbitMQinit() {
 	Channel = ch
 
 	q, err := ch.QueueDeclare(
-		"hello", // name
-		false,   // durable
-		false,   // delete when unused
-		false,   // exclusive
-		false,   // no-wait
-		nil,     // arguments
+		"invoices", // name
+		false,      // durable
+		false,      // delete when unused
+		false,      // exclusive
+		false,      // no-wait
+		nil,        // arguments
 	)
 	failOnError(err, "Failed to declare a queue")
 

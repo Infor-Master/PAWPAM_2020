@@ -37,16 +37,16 @@ services:
     networks: 
       - private_network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -d apidb -U admin"]
-      interval: 20s
-      timeout: 10s
+      test: ["CMD-SHELL", "pg_isready -d apidb -U admin -h 0.0.0.0 -p 5432"]
+      interval: 30s
+      timeout: 20s
       retries: 3
   
   ocr_consumer:
     container_name: 'Projecto_OCR'
     restart: unless-stopped
     build:
-      context: './backend'
+      context: './ocr_consumer'
       dockerfile: 'Dockerfile'
     volumes:
         - ./ocr_consumer:/go/src/projetoapi
@@ -60,6 +60,7 @@ services:
         - CHOKIDAR_USEPOLLING=true
     networks:
         - private_network
+        - public_network
     links:
         - database
         - rabbitmq

@@ -66,20 +66,11 @@ func AddInvoice(c *gin.Context) {
 
 	//envia para rabbitmq
 	//http.statuscreated
-	services.HelloWorld(services.Channel, services.Hello_queue)
+	msg := fmt.Sprintf(`{"Image": "%s", "Name": "%s", "UserID": "%d"}`, invoice.Image, invoice.Name, invoice.UserID)
 
-	text, err := services.ProcessImage(invoice.Image)
+	services.OCRInvoice(services.Channel, services.Hello_queue, msg)
 
-	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"status": http.StatusBadRequest, "message": "Cannot process image!"})
-		return
-	}
-
-	invoice.Info = text
-
-	services.Db.Save(&invoice)
-
-	c.JSON(http.StatusCreated, gin.H{"status": http.StatusCreated, "message": "Create successful!", "resourceId": invoice.ID})
+	c.JSON(http.StatusCreated, gin.H{"status": http.StatusCreated, "message": "Published Sucessfully"})
 }
 
 /**
