@@ -15,7 +15,7 @@
     <string name="listInvoices">List Invoices</string>
     <string name="numbers">Numbers</string>
     <string name="images">IMAGES</string>
-    <string name="button_delete_image">Button</string>
+    <string name="button_delete_image">Delete</string>
     <string name="showInvoice">Show Invoice</string>
     <string name="file_paths">content://com.kijevigombooc.pirosfogo.fileprovider/my_images</string>
     <string name="capture_image">Capture Image</string>
@@ -24,4 +24,6 @@
     <string name="new_password">New Password</string>
     <string name="profile_picture">Profile Picture</string>
     <string name="profile">Profile</string>
+    <string name="logout_button">Logout</string>
+    <string name="go_add_invoice">Add Invoice</string>
 </resources>

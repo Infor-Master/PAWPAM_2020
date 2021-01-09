@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Base64
 import edu.ufp.pam.pampaw_kotlin.R
 import edu.ufp.pam.pampaw_kotlin.retrofit.RestApiService
+import kotlinx.android.synthetic.main.activity_capture.*
 import kotlinx.android.synthetic.main.activity_image.*
 
 class ImageActivity : AppCompatActivity() {
@@ -14,13 +15,22 @@ class ImageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image)
 
+        floatingPictureback.setOnClickListener{
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
+        }
+
         button_delete_image.setOnClickListener{
             deleteImage()
         }
 
         val aux: String = intent.extras?.getCharSequence("ImageString") as String
 
-        val imageBytes = Base64.decode(aux.removePrefix("data:image/jpeg;base64,"), Base64.DEFAULT)
+        val ind = aux.indexOf(",")
+        val s2 = aux.substring(ind + 1)
+
+        val imageBytes = Base64.decode(s2, Base64.DEFAULT)
+
         val decodeString= BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
 
         textView_set_OCR_info.text = intent.extras?.getCharSequence("Info")

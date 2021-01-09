@@ -6,18 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".signup.SignupActivity">
 
+    <Button
+        android:id="@+id/button_Signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="69dp"
+        android:text="@string/signup_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSignupPassword" />
+
+    <EditText
+        android:id="@+id/editTextSignupPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="69dp"
+        android:ems="10"
+        android:hint="@string/signup_password"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="@+id/editTextSignupNif"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSignupNif" />
+
     <EditText
         android:id="@+id/editTextSignupName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="56dp"
         android:ems="10"
         android:hint="@string/signup_name"
         android:importantForAutofill="no"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/floatingSignupback" />
 
     <EditText
         android:id="@+id/editTextSignupUsername"
@@ -44,26 +67,20 @@
         app:layout_constraintStart_toStartOf="@+id/editTextSignupUsername"
         app:layout_constraintTop_toBottomOf="@+id/editTextSignupUsername" />
 
-    <EditText
-        android:id="@+id/editTextSignupPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="69dp"
-        android:ems="10"
-        android:hint="@string/signup_password"
-        android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="@+id/editTextSignupNif"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSignupNif"
-        android:importantForAutofill="no" />
-
-    <Button
-        android:id="@+id/button_Signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="69dp"
-        android:text="@string/signup_button"
-        app:layout_constraintEnd_toEndOf="parent"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingSignupback"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon.CenterStacked"
+        android:layout_width="54dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:clickable="true"
+        android:elevation="20dp"
+        android:focusable="true"
+        android:tint="#040404"
+        app:backgroundTint="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSignupPassword" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/abc_vector_test"
+        tools:ignore="PrivateResource" />
 </androidx.constraintlayout.widget.ConstraintLayout>

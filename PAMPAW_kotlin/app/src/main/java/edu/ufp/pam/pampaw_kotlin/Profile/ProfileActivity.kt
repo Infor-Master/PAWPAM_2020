@@ -10,12 +10,15 @@ import android.widget.EditText
 import android.widget.NumberPicker
 import com.auth0.android.jwt.JWT
 import edu.ufp.pam.pampaw_kotlin.CaptureImage.GalleryImageActivity
+import edu.ufp.pam.pampaw_kotlin.HomePage.HomePageActivity
 import edu.ufp.pam.pampaw_kotlin.R
+import edu.ufp.pam.pampaw_kotlin.login.LoginActivity
 import edu.ufp.pam.pampaw_kotlin.models.LoginInfo
 import edu.ufp.pam.pampaw_kotlin.models.Profile
 import edu.ufp.pam.pampaw_kotlin.retrofit.RestApiService
 import edu.ufp.pam.pampaw_kotlin.store.Global
 import edu.ufp.pam.pampaw_kotlin.store.SharedPreferencesHelper
+import kotlinx.android.synthetic.main.activity_capture.*
 import kotlinx.android.synthetic.main.activity_profile.*
 
 class ProfileActivity : AppCompatActivity() {
@@ -24,20 +27,11 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var name: EditText
     lateinit var nif: EditText
 
-
     val jwt = JWT(Global.token)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
-
-        println("---------JWT--------")
-        println(jwt.getClaim("username").asString())
-        println(jwt.getClaim("id").asInt())
-        println(jwt.getClaim("NIF").asInt())
-        println(jwt.getClaim("name").asString())
-
-        println("---------JWT--------")
 
         username = findViewById(R.id.editTextUsernameProfile)
         username.setText(jwt.getClaim("username").asString())
@@ -50,6 +44,11 @@ class ProfileActivity : AppCompatActivity() {
 
         button_upload_profile.setOnClickListener(){
             updateProfile()
+        }
+
+        floatingProfileback.setOnClickListener{
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -75,6 +74,8 @@ class ProfileActivity : AppCompatActivity() {
 
         apiService.updateProfile(values) {
             println(it)
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
     }
 }

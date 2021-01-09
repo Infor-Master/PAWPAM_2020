@@ -7,28 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".HomePage.HomePageActivity">
 
-    <Button
-        android:id="@+id/button_get_invoices"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="1dp"
-        android:text="@string/button_get_invoices"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="match_parent"
+        android:layout_width="411dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="68dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_get_invoices">
+        app:layout_constraintTop_toBottomOf="@+id/button_go_profile">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -45,12 +30,38 @@
 
     <Button
         android:id="@+id/button_go_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="45dp"
+        android:background="#AAA0A0"
+        android:backgroundTint="#6777D5"
         android:text="@string/profile"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_logout"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="45dp"
+        android:background="#AAA0A0"
+        android:backgroundTint="#6777D5"
+        android:text="@string/logout_button"
+        app:layout_constraintStart_toEndOf="@+id/buttonGoAddInvoice"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonGoAddInvoice"
+        android:layout_width="86dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="45dp"
+        android:background="#AAA0A0"
+        android:backgroundTint="#6777D5"
+        android:text="@string/go_add_invoice"
+        app:layout_constraintStart_toEndOf="@+id/button_go_profile"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

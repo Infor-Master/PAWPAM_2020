@@ -21,9 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="151dp"
         android:contentDescription="@string/profile_picture"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/floatingProfileback"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
@@ -31,27 +32,27 @@
         android:id="@+id/editTextNameProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="39dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="25dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/signup_name"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_picture" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextUsernameProfile"
+        app:layout_constraintStart_toStartOf="@+id/editTextUsernameProfile" />
 
     <EditText
         android:id="@+id/editTextUsernameProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="37dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/signup_username"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/editTextNameProfile"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNameProfile" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextNifProfile"
+        app:layout_constraintStart_toStartOf="@+id/editTextNifProfile" />
 
     <EditText
         android:id="@+id/editTextNewPasswordProfile"
@@ -95,12 +96,31 @@
         android:id="@+id/editTextNifProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="37dp"
-        android:layout_marginEnd="3dp"
         android:ems="10"
         android:hint="@string/signup_nif"
         android:inputType="text"
-        app:layout_constraintEnd_toEndOf="@+id/editTextUsernameProfile"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUsernameProfile" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingProfileback"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon.CenterStacked"
+        android:layout_width="0dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="80dp"
+        android:clickable="true"
+        android:elevation="20dp"
+        android:focusable="true"
+        android:tint="#040404"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/profile_picture"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/abc_vector_test"
+        tools:ignore="PrivateResource" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

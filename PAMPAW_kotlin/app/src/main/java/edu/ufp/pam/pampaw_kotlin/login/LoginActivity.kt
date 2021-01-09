@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
 import edu.ufp.pam.pampaw_kotlin.CaptureImage.GalleryImageActivity
+import edu.ufp.pam.pampaw_kotlin.HomePage.HomePageActivity
 import edu.ufp.pam.pampaw_kotlin.R
 import edu.ufp.pam.pampaw_kotlin.models.LoginInfo
 import edu.ufp.pam.pampaw_kotlin.retrofit.RestApiService
@@ -51,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
                     auxToken
                 )
 
-                val intent = Intent(this, GalleryImageActivity::class.java)
+                val intent = Intent(this, HomePageActivity::class.java)
                 startActivity(intent)
             }
         }

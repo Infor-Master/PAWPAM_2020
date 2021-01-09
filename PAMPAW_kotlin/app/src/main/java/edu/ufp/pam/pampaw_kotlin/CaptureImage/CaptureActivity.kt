@@ -18,11 +18,13 @@ import android.util.Base64
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.auth0.android.jwt.JWT
+import edu.ufp.pam.pampaw_kotlin.HomePage.HomePageActivity
 import edu.ufp.pam.pampaw_kotlin.R
 import edu.ufp.pam.pampaw_kotlin.models.InvoiceInfo
 import edu.ufp.pam.pampaw_kotlin.retrofit.RestApiService
 import edu.ufp.pam.pampaw_kotlin.store.Global
 import kotlinx.android.synthetic.main.activity_capture.*
+import kotlinx.android.synthetic.main.activity_capture_image.*
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 
@@ -66,6 +68,11 @@ class CaptureActivity : AppCompatActivity() {
                 //system os is < marshmallow
                 openCamera()
             }
+        }
+
+        floatingCaptureback.setOnClickListener{
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
         }
     }
 

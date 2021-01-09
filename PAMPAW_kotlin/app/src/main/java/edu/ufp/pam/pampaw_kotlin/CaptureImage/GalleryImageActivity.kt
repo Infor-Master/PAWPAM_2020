@@ -24,6 +24,7 @@ import androidx.core.content.FileProvider
 import com.auth0.android.jwt.JWT
 import edu.ufp.pam.pampaw_kotlin.HomePage.HomePageActivity
 import edu.ufp.pam.pampaw_kotlin.R
+import edu.ufp.pam.pampaw_kotlin.login.LoginActivity
 import edu.ufp.pam.pampaw_kotlin.models.InvoiceInfo
 import edu.ufp.pam.pampaw_kotlin.retrofit.RestApiService
 import edu.ufp.pam.pampaw_kotlin.store.Global
@@ -43,6 +44,45 @@ class GalleryImageActivity : AppCompatActivity() {
     private lateinit var btnChoose : Button
     //Our constants
     private val OPERATION_CHOOSE_PHOTO = 1
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_capture_image)
+
+        initializeWidgets()
+
+        button_upload_image.setOnClickListener{
+            if(auxPathImage!=="" && mImageView!=null){
+                val aux=convertImage(auxPathImage)
+                uploadInvoiceDB(aux, auxPathImage)
+            }
+        }
+
+        //btnCapture.setOnClickListener{capturePhoto()}
+        btnCapture.setOnClickListener{
+            val intent = Intent(this, CaptureActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnChoose.setOnClickListener{
+            //check permission at runtime
+            val checkSelfPermission = ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            if (checkSelfPermission != PackageManager.PERMISSION_GRANTED){
+                //Requests permissions to be granted to this application at runtime
+                ActivityCompat.requestPermissions(this,
+                    arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+            }
+            else{
+                openGallery()
+            }
+        }
+
+        floatingGalleryback.setOnClickListener{
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
+        }
+    }
 
     private fun initializeWidgets() {
         btnCapture = findViewById(R.id.button_Capture)
@@ -171,43 +211,5 @@ class GalleryImageActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_capture_image)
-
-        initializeWidgets()
-
-        button_upload_image.setOnClickListener{
-            if(auxPathImage!=="" && mImageView!=null){
-                val aux=convertImage(auxPathImage)
-                uploadInvoiceDB(aux, auxPathImage)
-            }
-        }
-
-        //btnCapture.setOnClickListener{capturePhoto()}
-        btnCapture.setOnClickListener{
-            val intent = Intent(this, CaptureActivity::class.java)
-            startActivity(intent)
-        }
-
-        btnChoose.setOnClickListener{
-            //check permission at runtime
-            val checkSelfPermission = ContextCompat.checkSelfPermission(this,
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            if (checkSelfPermission != PackageManager.PERMISSION_GRANTED){
-                //Requests permissions to be granted to this application at runtime
-                ActivityCompat.requestPermissions(this,
-                    arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
-            }
-            else{
-                openGallery()
-            }
-        }
-
-        floatingActionButtonGetInvoices.setOnClickListener{
-            val intent = Intent(this, HomePageActivity::class.java)
-            startActivity(intent)
-        }
-    }
 }
 

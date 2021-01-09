@@ -6,52 +6,74 @@
     android:layout_height="match_parent"
     tools:context=".HomePage.ImageActivity">
 
-    <TextView
-        android:id="@+id/textView_set_OCR_info"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="26dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_delete_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_imageActivity" />
-
     <ImageView
         android:id="@+id/imageView_imageActivity"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="31dp"
+        android:layout_width="379dp"
+        android:layout_height="251dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="13dp"
         android:contentDescription="@string/showInvoice"
-        app:layout_constraintBottom_toTopOf="@+id/textView_set_OCR_info"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_name_invoice"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <Button
         android:id="@+id/button_delete_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_width="71dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="16dp"
+        android:background="#633B3B"
+        android:backgroundTint="#FFFFFF"
         android:text="@string/button_delete_image"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_set_OCR_info"
+        app:layout_constraintStart_toEndOf="@+id/textView_name_invoice"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Delete" />
 
     <TextView
         android:id="@+id/textView_name_invoice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginBottom="31dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView_imageActivity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="128dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="41dp"
+        app:layout_constraintStart_toEndOf="@+id/floatingPictureback"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingPictureback"
+        style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon.CenterStacked"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:elevation="20dp"
+        android:focusable="true"
+        android:tint="#040404"
+        app:backgroundTint="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/abc_vector_test"
+        tools:ignore="PrivateResource" />
+
+    <ScrollView
+        android:layout_width="409dp"
+        android:layout_height="323dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="38dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_imageActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView_set_OCR_info"
+                android:layout_width="match_parent"
+                android:layout_height="264dp" />
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

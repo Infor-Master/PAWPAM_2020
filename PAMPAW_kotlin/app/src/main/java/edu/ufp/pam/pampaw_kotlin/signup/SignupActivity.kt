@@ -1,9 +1,12 @@
 package edu.ufp.pam.pampaw_kotlin.signup
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
+import edu.ufp.pam.pampaw_kotlin.Profile.ProfileActivity
 import edu.ufp.pam.pampaw_kotlin.R
+import edu.ufp.pam.pampaw_kotlin.login.LoginActivity
 import edu.ufp.pam.pampaw_kotlin.models.UserInfo
 import edu.ufp.pam.pampaw_kotlin.retrofit.RestApiService
 import kotlinx.android.synthetic.main.activity_signup.*
@@ -15,6 +18,11 @@ class SignupActivity : AppCompatActivity() {
 
         button_Signup.setOnClickListener{
             addUser()
+        }
+
+        floatingSignupback.setOnClickListener{
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -29,10 +37,11 @@ class SignupActivity : AppCompatActivity() {
             nif = (findViewById<EditText>(R.id.editTextSignupNif)).text.toString().toInt()
         )
 
-        println("USER : $userInfo")
-
         apiService.addUser(userInfo) {
-            println("Added")
+            if (it?.nif!= null){
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 }
