@@ -20,10 +20,8 @@ func failOnError(err error, msg string) {
 func OCRInvoice(msg []byte) {
 
 	type Invoice struct {
-		Image  string `json:"Image"`
-		Name   string `json:"Name"`
-		UserID string `json:"UserID"`
-		Info   string
+		Image string `json:"Image"`
+		ID    string `json:"ID"`
 	}
 
 	data := Invoice{}
@@ -37,15 +35,12 @@ func OCRInvoice(msg []byte) {
 	log.Printf(text)
 
 	var invoice model.Invoice
-	invoice.Image = data.Image
-	invoice.Name = data.Name
-	userid, err := strconv.Atoi(data.UserID)
-	invoice.UserID = userid
-	invoice.Info = text
+	id, err := strconv.Atoi(data.ID)
+	services.Db.First(&invoice, "id = ?", id)
 
 	log.Printf(`"Saving Invoice %s with user %d..."`, invoice.Name, invoice.UserID)
 
-	services.Db.Save(&invoice)
+	services.Db.Model(&invoice).Update("info", text)
 }
 
 func init() {

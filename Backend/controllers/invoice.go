@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"projetoapi/model"
 	"projetoapi/services"
@@ -64,9 +65,13 @@ func AddInvoice(c *gin.Context) {
 		return
 	}
 
+	log.Printf(`"Saving Invoice %s with user %d..."`, invoice.Name, invoice.UserID)
+
+	services.Db.Save(&invoice)
+
 	//envia para rabbitmq
 	//http.statuscreated
-	msg := fmt.Sprintf(`{"Image": "%s", "Name": "%s", "UserID": "%d"}`, invoice.Image, invoice.Name, invoice.UserID)
+	msg := fmt.Sprintf(`{"Image": "%s", "ID": "%d"}`, invoice.Image, invoice.ID)
 
 	services.OCRInvoice(services.Channel, services.Hello_queue, msg)
 
