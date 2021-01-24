@@ -17,7 +17,7 @@ const client = new W3CWebSocket('ws://localhost:5000/ws');
 const InvoicePage = props => {
 
     client.onopen = () => {
-        console.log('WebSocket Client Connected');
+        //console.log('WebSocket Client Connected');
     };
 
     // styles

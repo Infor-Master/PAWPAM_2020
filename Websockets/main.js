@@ -5,7 +5,6 @@ var app = require("express")();
 const wsServer = new ws.Server({ noServer: true });
 
 wsServer.on("connection", (socket) => {
-  console.log("got connection");
 
   socket.on("message", (msg) => {
     const dataFromClient = JSON.parse(msg);

@@ -10,7 +10,6 @@ export const addInvoice = (picture, client, token) => {
     let reader = new FileReader();
     reader.readAsDataURL(picture[0]);
     reader.onload = function () {
-      console.log(file);
       axios({
         method: "post",
         baseURL: api.URL_INVOICES,
@@ -25,9 +24,6 @@ export const addInvoice = (picture, client, token) => {
       })
         .then((res) => {
           dispatch(loadingErrorActions.startRequest());
-
-          console.log(res)
-          //alert("Invoice added!")
           client.send(JSON.stringify({
             data: "invoices",
             type: "userevent"
@@ -47,7 +43,6 @@ export const addInvoice = (picture, client, token) => {
 ////////////////////////////////////// GET INVOICES //////////////////////
 
 const getUserInvoices = (invoices) => {
-  //console.log(invoices)
   return {
     type: actionTypes.GET_ALL_INVOICES,
     invoices: invoices,
@@ -88,7 +83,6 @@ export const deleteInvoice = (invoice, client, token) => {
       },
     })
       .then((res) => {
-        console.log(res)
 
         client.send(JSON.stringify({
           data: "invoices",

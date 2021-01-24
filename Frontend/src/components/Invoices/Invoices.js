@@ -20,10 +20,9 @@ const client = new W3CWebSocket('ws://localhost:5000/ws');
 const Invoices = props => {
     
     client.onopen = () => {
-        console.log('WebSocket Client Connected');
+        //console.log('WebSocket Client Connected');
     };
     client.onmessage = (msg) => {
-        console.log(msg)
         const dataFromServer = JSON.parse(msg.data);
         switch (dataFromServer.type) {
             case "serverevent":
@@ -34,7 +33,7 @@ const Invoices = props => {
                          }
                         break;
                     default:
-                        console.log("defaulted: " + msg);
+                        //console.log("defaulted: " + msg);
                 }
               break;
             default:
@@ -78,7 +77,6 @@ const Invoices = props => {
     if (!props.invoices.loading) {
 
         invoices = props.invoices.map(invoice => {
-            console.log(invoice)
 
             return <Invoice
                 key={invoice.ID}
@@ -150,17 +148,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onAddInvoice: (picture, client, token) => dispatch(actions.addInvoice(picture, client, token)),
         onGetInvoices: (id, token) => dispatch(actions.getInvoices(id, token))
-        /* 
-        onGetAllPlaces: (token) => dispatch(actions.fetchAllPlaces(token)),
-        onGetUserPlaces: (token) => dispatch(actions.fetchUserPlaces(token)),
-        onUpdatePlace: (place, token) => dispatch(actions.editPlace(place, token)),
-        onDeletePlace: (id, token) => dispatch(actions.deletePlace(id, token)),
-        */
-
-        /*  // sockets
-        onAddSocketList: (placeID, users) => dispatch(actions.addSocketList(placeID, users)),
-        onAddSocketPeople: (placeID, numUsers) => dispatch(actions.addSocketPeople(placeID, numUsers))
-         */
     };
 }
 
