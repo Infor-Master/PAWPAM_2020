@@ -1,9 +1,11 @@
 package edu.ufp.pam.pampaw_kotlin.login
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
+import com.auth0.android.jwt.JWT
 import edu.ufp.pam.pampaw_kotlin.CaptureImage.GalleryImageActivity
 import edu.ufp.pam.pampaw_kotlin.HomePage.HomePageActivity
 import edu.ufp.pam.pampaw_kotlin.R
@@ -46,11 +48,25 @@ class LoginActivity : AppCompatActivity() {
             println(it?.token)
             val auxToken= it?.token
             if(auxToken!=null){
+
+                var auxjwt = JWT(auxToken)
+                println("----------------TOKEN-----------------")
+                //println(auxjwt.claims.toString())
+                println(auxjwt.getClaim("name").asString())
+                println(auxjwt.getClaim("NIF").asInt())
+                println(auxjwt.getClaim("username").asString())
                 Global.token+=auxToken
+
                 SharedPreferencesHelper(this).setValueString(
                     "token",
                     auxToken
                 )
+
+                //println("------- LOCAL PREFERENCE TOKEN -----------")
+                val aux:String=""
+                val auxTest = this.getSharedPreferences("code", Context.MODE_PRIVATE)
+                auxTest.getString("token","")
+                //println(aux)
 
                 val intent = Intent(this, HomePageActivity::class.java)
                 startActivity(intent)

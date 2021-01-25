@@ -1,24 +1,19 @@
 package edu.ufp.pam.pampaw_kotlin.Profile
 
-import android.Manifest
+import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
-import android.widget.NumberPicker
 import com.auth0.android.jwt.JWT
-import edu.ufp.pam.pampaw_kotlin.CaptureImage.GalleryImageActivity
 import edu.ufp.pam.pampaw_kotlin.HomePage.HomePageActivity
 import edu.ufp.pam.pampaw_kotlin.R
 import edu.ufp.pam.pampaw_kotlin.login.LoginActivity
-import edu.ufp.pam.pampaw_kotlin.models.LoginInfo
 import edu.ufp.pam.pampaw_kotlin.models.Profile
 import edu.ufp.pam.pampaw_kotlin.retrofit.RestApiService
 import edu.ufp.pam.pampaw_kotlin.store.Global
 import edu.ufp.pam.pampaw_kotlin.store.SharedPreferencesHelper
-import kotlinx.android.synthetic.main.activity_capture.*
 import kotlinx.android.synthetic.main.activity_profile.*
 
 class ProfileActivity : AppCompatActivity() {
@@ -27,9 +22,16 @@ class ProfileActivity : AppCompatActivity() {
     lateinit var name: EditText
     lateinit var nif: EditText
 
+    //var  prefs : SharedPreferences = this.getSharedPreferences("codes", Context.MODE_PRIVATE)
+
     val jwt = JWT(Global.token)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+       /* var aux: String= ""
+        println("------- LOCAL PREFERENCE TOKEN -----------")
+        println(prefs.getString("token",aux))
+*/
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
@@ -40,7 +42,15 @@ class ProfileActivity : AppCompatActivity() {
         name.setText(jwt.getClaim("name").asString())
 
         nif = findViewById(R.id.editTextNifProfile)
-        nif.setText(jwt.getClaim("NIF").asInt().toString())
+        nif.setText(jwt.getClaim("NIF").asString())
+
+        println("-----------NIF-------1---------")
+        println(jwt.getClaim("NIF").asString())
+        println("-----------NIF-------2--------")
+        println(jwt.getClaim("NIF").asInt())
+
+        /*nif = findViewById(R.id.editTextNifProfile)
+        nif.setText(jwt.getClaim("NIF").asInt().toString())*/
 
         button_upload_profile.setOnClickListener(){
             updateProfile()

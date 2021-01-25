@@ -94,7 +94,6 @@ const Invoices = props => {
         invoices = (<h4>empty!</h4>);
     }
 
-
     return (
         <Container maxWidth="sm" >
             {isAuth}
@@ -150,17 +149,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onAddInvoice: (picture, client, token) => dispatch(actions.addInvoice(picture, client, token)),
         onGetInvoices: (id, token) => dispatch(actions.getInvoices(id, token))
-        /* 
-        onGetAllPlaces: (token) => dispatch(actions.fetchAllPlaces(token)),
-        onGetUserPlaces: (token) => dispatch(actions.fetchUserPlaces(token)),
-        onUpdatePlace: (place, token) => dispatch(actions.editPlace(place, token)),
-        onDeletePlace: (id, token) => dispatch(actions.deletePlace(id, token)),
-        */
-
-        /*  // sockets
-        onAddSocketList: (placeID, users) => dispatch(actions.addSocketList(placeID, users)),
-        onAddSocketPeople: (placeID, numUsers) => dispatch(actions.addSocketPeople(placeID, numUsers))
-         */
     };
 }
 
