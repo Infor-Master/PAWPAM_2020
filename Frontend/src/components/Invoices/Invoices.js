@@ -92,7 +92,6 @@ const Invoices = props => {
         invoices = (<h4>empty!</h4>);
     }
 
-
     return (
         <Container maxWidth="sm" >
             {isAuth}

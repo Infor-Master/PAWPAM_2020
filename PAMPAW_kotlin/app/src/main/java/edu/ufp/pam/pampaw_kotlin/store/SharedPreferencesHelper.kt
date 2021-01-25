@@ -9,9 +9,7 @@ class SharedPreferencesHelper(context: Context) {
 
     fun setValueString(KEY_NAME: String, value: String) {
         val editor: SharedPreferences.Editor = sharedPref.edit()
-
         editor.putString(KEY_NAME, value)
-
         editor.apply()
     }
 
